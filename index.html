@@ -5256,7 +5256,7 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(syncSanctionsNameFromSec1, 800);
 });
 
-// Auto-Screen: real UN lookup, AMLC + DTL always CLEAR
+// Auto-Screen: real UN lookup — all three cards mirror the same result
 async function runAutoScreen() {
   const nameField = document.getElementById('sanctionsNameInput');
   const name = nameField ? nameField.value.trim() : '';
@@ -5279,9 +5279,10 @@ async function runAutoScreen() {
   lastUNMatch = match || null;
   setWatchlist('un', match ? 'hit' : 'clear');
 
-  // AMLC & DTL — always CLEAR (no data uploaded)
-  setWatchlist('amlc', 'clear');
-  setWatchlist('dtl',  'clear');
+  // AMLC & DTL — mirror the UN result (same PDF is the source for all three)
+  const result = match ? 'hit' : 'clear';
+  setWatchlist('amlc', result);
+  setWatchlist('dter', result);
 
   // Auto-fill screened-at timestamp
   const dtField = document.getElementById('sanctionsScreenedAt');
