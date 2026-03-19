@@ -2268,9 +2268,9 @@ select.form-input {
       </div>
       <div class="profile-form-wrap">
     <div class="form-grid">
-      <div class="form-group"><label class="form-label">Last Name & Suffix <span class="hint">(Sr., Jr., III)</span></label><input class="form-input" placeholder="Enter last name"></div>
-      <div class="form-group"><label class="form-label">First Name</label><input class="form-input" placeholder="Enter first name"></div>
-      <div class="form-group"><label class="form-label">Middle Name</label><input class="form-input" placeholder="Enter middle name"></div>
+      <div class="form-group"><label class="form-label">Last Name & Suffix <span class="hint">(Sr., Jr., III)</span></label><input class="form-input" id="sec1LastName" placeholder="Enter last name"></div>
+      <div class="form-group"><label class="form-label">First Name</label><input class="form-input" id="sec1FirstName" placeholder="Enter first name"></div>
+      <div class="form-group"><label class="form-label">Middle Name</label><input class="form-input" id="sec1MiddleName" placeholder="Enter middle name"></div>
       <div class="form-group"><label class="form-label">Maiden Name <span class="hint">(if applicable)</span></label><input class="form-input"></div>
       <div class="form-group"><label class="form-label">Date of Birth</label><input class="form-input" type="date"></div>
       <div class="form-group"><label class="form-label">Place of Birth</label><input class="form-input" placeholder="City/Municipality, Province"></div>
@@ -5238,42 +5238,22 @@ function updateSanctionsOverall() {
 
 // ── Sync Section I name → sanctions name field (real-time) ──────────
 function syncSanctionsNameFromSec1() {
-  const secI = document.getElementById('sec-0');
-  if (!secI) return;
-  let last = '', first = '', middle = '';
-  secI.querySelectorAll('.form-label').forEach(lbl => {
-    const txt = lbl.textContent.toLowerCase();
-    const inp = lbl.closest('.form-group')?.querySelector('input.form-input');
-    if (!inp) return;
-    if (txt.includes('last name'))   last   = inp.value.trim();
-    if (txt.includes('first name'))  first  = inp.value.trim();
-    if (txt.includes('middle name')) middle = inp.value.trim();
-  });
+  const first  = document.getElementById('sec1FirstName')?.value.trim()  || '';
+  const middle = document.getElementById('sec1MiddleName')?.value.trim() || '';
+  const last   = document.getElementById('sec1LastName')?.value.trim()   || '';
   const nameField = document.getElementById('sanctionsNameInput');
   if (!nameField) return;
-  // Build: FIRST MIDDLE LAST — matching UN list name order
-  const parts = [first, middle, last].filter(Boolean);
-  if (parts.length) nameField.value = parts.join(' ');
+  nameField.value = [first, middle, last].filter(Boolean).join(' ');
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    // Initial sync on load (handles restored drafts)
-    syncSanctionsNameFromSec1();
-    updateSanctionsOverall();
-
-    // Attach live listeners to Section I name inputs
-    const secI = document.getElementById('sec-0');
-    if (secI) {
-      secI.querySelectorAll('.form-label').forEach(lbl => {
-        const txt = lbl.textContent.toLowerCase();
-        if (txt.includes('last name') || txt.includes('first name') || txt.includes('middle name')) {
-          const inp = lbl.closest('.form-group')?.querySelector('input.form-input');
-          if (inp) inp.addEventListener('input', syncSanctionsNameFromSec1);
-        }
-      });
-    }
-  }, 700);
+  // Attach live listeners directly by ID — fires on every keystroke
+  ['sec1FirstName', 'sec1MiddleName', 'sec1LastName'].forEach(id => {
+    const inp = document.getElementById(id);
+    if (inp) inp.addEventListener('input', syncSanctionsNameFromSec1);
+  });
+  // Initial sync (handles draft restore)
+  setTimeout(syncSanctionsNameFromSec1, 800);
 });
 
 // Auto-Screen: real UN lookup, AMLC + DTL always CLEAR
