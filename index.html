@@ -508,6 +508,199 @@ select.form-input {
 }
 .auth-box-desc { font-size: 12px; color: var(--text-mid); margin-bottom: 14px; line-height: 1.5; }
 
+/* ======================= SANCTIONS SCREENING ======================= */
+.sanctions-header-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px; flex-wrap: wrap; gap: 10px;
+}
+.sanctions-title-group { display: flex; align-items: center; gap: 10px; }
+.sanctions-shield {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, #7B1FA2, #AB47BC);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(123,31,162,.25);
+}
+.sanctions-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; color: var(--pine-dark); font-weight: 600;
+}
+.sanctions-subheading { font-size: 11px; color: var(--text-light); margin-top: 1px; }
+
+/* Name + Auto-Screen row */
+.sanctions-autorow {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.sanctions-name-input {
+  flex: 1; min-width: 180px; padding: 9px 14px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: var(--text);
+  background: var(--pine-tint); outline: none; transition: all .25s ease;
+}
+.sanctions-name-input:focus {
+  border-color: #AB47BC; background: white;
+  box-shadow: 0 0 0 3px rgba(171,71,188,.12);
+}
+.btn-autoscreen {
+  padding: 9px 20px; border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #7B1FA2, #9C27B0);
+  color: white; border: none; cursor: pointer;
+  font-family: 'Source Sans 3', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: .3px; display: flex; align-items: center; gap: 7px;
+  transition: all .25s ease; white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(123,31,162,.3);
+}
+.btn-autoscreen:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(123,31,162,.4); }
+.btn-autoscreen:active { transform: translateY(0) scale(0.97); }
+.btn-autoscreen.screening { animation: screenPulse 1s ease infinite; }
+@keyframes screenPulse {
+  0%,100% { box-shadow: 0 2px 8px rgba(123,31,162,.3); }
+  50% { box-shadow: 0 2px 18px rgba(123,31,162,.6); }
+}
+
+/* Watchlist rows */
+.watchlist-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px;
+}
+@media (max-width: 700px) { .watchlist-grid { grid-template-columns: 1fr; } }
+.watchlist-card {
+  border: 1.5px solid var(--border-light); border-radius: var(--radius);
+  background: white; padding: 14px 16px; transition: all .3s ease;
+  position: relative; overflow: hidden;
+}
+.watchlist-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--border); transition: all .3s ease;
+}
+.watchlist-card.status-clear::before { background: #2E7D32; }
+.watchlist-card.status-hit::before   { background: #C62828; }
+.watchlist-card.status-pending::before { background: #E65100; }
+
+.watchlist-name {
+  font-size: 11px; font-weight: 700; color: var(--text-mid);
+  letter-spacing: .4px; text-transform: uppercase; margin-bottom: 6px;
+  display: flex; align-items: center; gap: 6px;
+}
+.watchlist-icon { font-size: 14px; }
+.watchlist-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;
+  letter-spacing: .3px; margin-bottom: 10px; transition: all .3s ease;
+  border: 1.5px solid transparent;
+}
+.watchlist-badge.badge-none    { background: #F5F5F5; color: #9E9E9E; border-color: #E0E0E0; }
+.watchlist-badge.badge-clear   { background: #E8F5E9; color: #2E7D32; border-color: #A5D6A7; }
+.watchlist-badge.badge-hit     { background: #FFEBEE; color: #C62828; border-color: #EF9A9A; }
+.watchlist-badge.badge-pending { background: #FFF3E0; color: #E65100; border-color: #FFCC80; }
+
+.watchlist-btn-group { display: flex; gap: 5px; flex-wrap: wrap; }
+.wl-btn {
+  padding: 5px 11px; border-radius: 14px; font-size: 11px; font-weight: 600;
+  border: 1.5px solid var(--border); background: white; cursor: pointer;
+  transition: all .2s ease; color: var(--text-mid); font-family: 'Source Sans 3', sans-serif;
+}
+.wl-btn:hover { transform: translateY(-1px); }
+.wl-btn:active { transform: scale(0.95); }
+.wl-btn.active-clear   { background: #E8F5E9; border-color: #2E7D32; color: #2E7D32; }
+.wl-btn.active-hit     { background: #FFEBEE; border-color: #C62828; color: #C62828; }
+.wl-btn.active-pending { background: #FFF3E0; border-color: #E65100; color: #E65100; }
+
+/* Screened-by row */
+.sanctions-meta-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;
+}
+
+/* Warning banner */
+.sanctions-warning {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: #FFF8E1; border: 1.5px solid #FFD54F;
+  border-radius: var(--radius-sm); padding: 12px 14px;
+  margin-top: 10px; transition: all .4s ease;
+}
+.sanctions-warning.hidden { display: none; }
+.sanctions-warning-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.sanctions-warning-text { font-size: 12px; color: #E65100; line-height: 1.5; }
+.sanctions-warning-text strong { display: block; font-size: 13px; margin-bottom: 2px; }
+
+.sanctions-hit-banner {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: #FFEBEE; border: 1.5px solid #EF9A9A;
+  border-radius: var(--radius-sm); padding: 12px 14px;
+  margin-top: 10px; transition: all .4s ease;
+}
+.sanctions-hit-banner.hidden { display: none; }
+.sanctions-hit-text { font-size: 12px; color: #B71C1C; line-height: 1.5; }
+.sanctions-hit-text strong { display: block; font-size: 13px; margin-bottom: 2px; }
+
+/* AMLA Risk Assessment */
+.amla-section { margin-top: 20px; }
+.amla-title {
+  font-size: 13px; font-weight: 700; color: var(--pine-dark);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+}
+.amla-title::before { content: ''; width: 3px; height: 16px; background: #7B1FA2; border-radius: 2px; }
+
+.risk-rating-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 14px;
+}
+@media (max-width: 600px) { .risk-rating-grid { grid-template-columns: repeat(3, 1fr); } }
+.risk-card {
+  border: 2px solid var(--border); border-radius: var(--radius); padding: 14px 8px;
+  text-align: center; cursor: pointer; transition: all .25s ease;
+  background: white; position: relative; overflow: hidden;
+}
+.risk-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.risk-card:active { transform: scale(0.96); }
+.risk-card.selected {
+  box-shadow: 0 0 0 3px rgba(123,31,162,.15), var(--shadow-md);
+  transform: translateY(-2px);
+}
+.risk-card.selected::after {
+  content: '✓'; position: absolute; top: 6px; right: 8px;
+  width: 20px; height: 20px; border-radius: 50%; color: white;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  animation: checkPop .3s var(--ease);
+}
+/* risk colors */
+.risk-card[data-risk="Low"]        { }
+.risk-card[data-risk="Low"].selected        { border-color: #2E7D32; background: #E8F5E9; }
+.risk-card[data-risk="Low"].selected::after { background: #2E7D32; }
+.risk-card[data-risk="Normal"]     { }
+.risk-card[data-risk="Normal"].selected     { border-color: #1565C0; background: #E3F2FD; }
+.risk-card[data-risk="Normal"].selected::after { background: #1565C0; }
+.risk-card[data-risk="Medium"]     { }
+.risk-card[data-risk="Medium"].selected     { border-color: #E65100; background: #FFF3E0; }
+.risk-card[data-risk="Medium"].selected::after { background: #E65100; }
+.risk-card[data-risk="High"]       { }
+.risk-card[data-risk="High"].selected       { border-color: #C62828; background: #FFEBEE; }
+.risk-card[data-risk="High"].selected::after { background: #C62828; }
+.risk-card[data-risk="Prohibited"] { }
+.risk-card[data-risk="Prohibited"].selected { border-color: #4A148C; background: #F3E5F5; }
+.risk-card[data-risk="Prohibited"].selected::after { background: #4A148C; }
+
+.risk-emoji { font-size: 20px; margin-bottom: 6px; }
+.risk-label { font-size: 11px; font-weight: 700; letter-spacing: .3px; }
+.risk-card[data-risk="Low"] .risk-label        { color: #2E7D32; }
+.risk-card[data-risk="Normal"] .risk-label     { color: #1565C0; }
+.risk-card[data-risk="Medium"] .risk-label     { color: #E65100; }
+.risk-card[data-risk="High"] .risk-label       { color: #C62828; }
+.risk-card[data-risk="Prohibited"] .risk-label { color: #4A148C; }
+
+.amla-form-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.sanctions-textarea {
+  width: 100%; padding: 10px 14px; min-height: 80px; resize: vertical;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: var(--text);
+  background: var(--pine-tint); outline: none; transition: all .25s ease; line-height: 1.5;
+}
+.sanctions-textarea:focus {
+  border-color: #AB47BC; background: white;
+  box-shadow: 0 0 0 3px rgba(171,71,188,.1);
+}
+
 /* ======================= CONDITIONS ======================= */
 .conditions-box {
   background: var(--pine-tint); border: 1px solid var(--border);
@@ -2458,6 +2651,128 @@ select.form-input {
     <div class="form-group full" style="margin-top:16px"><label class="form-label">Opened on behalf of another?</label><div class="radio-group" style="margin-top:6px"><label class="radio-item"><input type="radio" name="behalf" value="y"><span class="check-mark">✓</span>Yes</label><label class="radio-item"><input type="radio" name="behalf" value="n"><span class="check-mark">✓</span>No</label></div></div>
     <div class="subsection"><div class="subsection-title">Beneficial Owner (if applicable)</div><div class="form-grid"><div class="form-group"><label class="form-label">Last Name</label><input class="form-input"></div><div class="form-group"><label class="form-label">First Name</label><input class="form-input"></div><div class="form-group"><label class="form-label">Relationship</label><input class="form-input"></div><div class="form-group"><label class="form-label">Date of Birth</label><input class="form-input" type="date"></div><div class="form-group full"><label class="form-label">Address</label><input class="form-input"></div><div class="form-group"><label class="form-label">Contact</label><input class="form-input"></div><div class="form-group"><label class="form-label">Source of Fund</label><input class="form-input"></div></div></div>
     <div class="subsection"><div class="subsection-title">Account Processing</div><div class="form-grid"><div class="form-group"><label class="form-label">Risk Classification</label><select class="form-input"><option value="">Select</option><option>Low</option><option>Normal</option><option>High</option></select></div><div class="form-group"><label class="form-label">Account Number</label><input class="form-input"></div><div class="form-group"><label class="form-label">Date Opened</label><input class="form-input" type="date"></div><div class="form-group"><label class="form-label">Initial Deposit</label><input class="form-input" placeholder="₱"></div><div class="form-group"><label class="form-label">Verified By</label><input class="form-input"></div><div class="form-group"><label class="form-label">Approved By</label><input class="form-input"></div></div></div>
+    <!-- ===== SANCTIONS SCREENING SUBSECTION ===== -->
+    <div class="subsection" id="sanctionsSubsection" style="border-color:#CE93D8; background:linear-gradient(135deg,#FAF5FF 0%,var(--pine-tint) 100%);">
+
+      <!-- Header Bar -->
+      <div class="sanctions-header-bar">
+        <div class="sanctions-title-group">
+          <div class="sanctions-shield">🛡️</div>
+          <div>
+            <div class="sanctions-heading">Sanctions Screening</div>
+            <div class="sanctions-subheading">AML/CFT Compliance Check — AMLA / BSP Circular 706</div>
+          </div>
+        </div>
+        <div id="sanctionsOverallBadge" class="watchlist-badge badge-none" style="font-size:12px; padding:5px 14px;">⏳ Not Yet Screened</div>
+      </div>
+
+      <!-- Name + Auto-Screen -->
+      <div class="sanctions-autorow">
+        <input type="text" id="sanctionsNameInput" class="sanctions-name-input" placeholder="Full name to screen (auto-fills from Section I)">
+        <button class="btn-autoscreen" id="btnAutoScreen" onclick="runAutoScreen()">
+          <span>🔍</span> Auto-Screen Now
+        </button>
+      </div>
+
+      <!-- 3 Watchlist Cards -->
+      <div class="watchlist-grid">
+        <!-- UN -->
+        <div class="watchlist-card" id="wlCard-un">
+          <div class="watchlist-name"><span class="watchlist-icon">🌐</span> UN Sanctions List</div>
+          <div class="watchlist-badge badge-none" id="wlBadge-un">— Not Screened</div>
+          <div class="watchlist-btn-group">
+            <button class="wl-btn" onclick="setWatchlist('un','clear')">✓ Clear</button>
+            <button class="wl-btn" onclick="setWatchlist('un','hit')">⚠ Hit</button>
+            <button class="wl-btn" onclick="setWatchlist('un','pending')">⏳ Pending</button>
+          </div>
+        </div>
+        <!-- AMLC -->
+        <div class="watchlist-card" id="wlCard-amlc">
+          <div class="watchlist-name"><span class="watchlist-icon">🇵🇭</span> AMLC Watchlist</div>
+          <div class="watchlist-badge badge-none" id="wlBadge-amlc">— Not Screened</div>
+          <div class="watchlist-btn-group">
+            <button class="wl-btn" onclick="setWatchlist('amlc','clear')">✓ Clear</button>
+            <button class="wl-btn" onclick="setWatchlist('amlc','hit')">⚠ Hit</button>
+            <button class="wl-btn" onclick="setWatchlist('amlc','pending')">⏳ Pending</button>
+          </div>
+        </div>
+        <!-- Domestic Terrorist -->
+        <div class="watchlist-card" id="wlCard-dter">
+          <div class="watchlist-name"><span class="watchlist-icon">⚖️</span> Domestic Terrorist List</div>
+          <div class="watchlist-badge badge-none" id="wlBadge-dter">— Not Screened</div>
+          <div class="watchlist-btn-group">
+            <button class="wl-btn" onclick="setWatchlist('dter','clear')">✓ Clear</button>
+            <button class="wl-btn" onclick="setWatchlist('dter','hit')">⚠ Hit</button>
+            <button class="wl-btn" onclick="setWatchlist('dter','pending')">⏳ Pending</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screened-by + Date -->
+      <div class="sanctions-meta-row">
+        <div class="form-group">
+          <label class="form-label">Screened By</label>
+          <input type="text" id="sanctionsScreenedBy" class="form-input" placeholder="Officer name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date &amp; Time Screened</label>
+          <input type="datetime-local" id="sanctionsScreenedAt" class="form-input">
+        </div>
+      </div>
+
+      <!-- Warning banners -->
+      <div class="sanctions-warning hidden" id="sanctionsWarning">
+        <div class="sanctions-warning-icon">⚠️</div>
+        <div class="sanctions-warning-text">
+          <strong>Screening Incomplete</strong>
+          One or more watchlists have not been screened yet. All three lists must be checked before account processing can proceed.
+        </div>
+      </div>
+      <div class="sanctions-hit-banner hidden" id="sanctionsHitBanner">
+        <div class="sanctions-warning-icon">🚨</div>
+        <div class="sanctions-hit-text">
+          <strong>Potential Match Detected</strong>
+          A "Hit" result was recorded on one or more watchlists. Escalate immediately to the Compliance Officer and do NOT proceed with account opening until cleared.
+        </div>
+      </div>
+
+      <!-- ── AMLA Customer Risk Assessment ── -->
+      <div class="amla-section">
+        <div class="amla-title">AMLA Customer Risk Assessment</div>
+
+        <!-- 5-tier Risk Rating -->
+        <div class="form-label" style="margin-bottom:10px;">Risk Rating</div>
+        <div class="risk-rating-grid" id="riskRatingGrid">
+          <div class="risk-card" data-risk="Low"        onclick="selectRisk(this)"><div class="risk-emoji">🟢</div><div class="risk-label">Low</div></div>
+          <div class="risk-card" data-risk="Normal"     onclick="selectRisk(this)"><div class="risk-emoji">🔵</div><div class="risk-label">Normal</div></div>
+          <div class="risk-card" data-risk="Medium"     onclick="selectRisk(this)"><div class="risk-emoji">🟠</div><div class="risk-label">Medium</div></div>
+          <div class="risk-card" data-risk="High"       onclick="selectRisk(this)"><div class="risk-emoji">🔴</div><div class="risk-label">High</div></div>
+          <div class="risk-card" data-risk="Prohibited" onclick="selectRisk(this)"><div class="risk-emoji">⛔</div><div class="risk-label">Prohibited</div></div>
+        </div>
+        <input type="hidden" id="amlaRiskRating" value="">
+
+        <div class="amla-form-grid" style="margin-top:14px;">
+          <div class="form-group full">
+            <label class="form-label">Risk Factors / Justification <span class="hint">(required for Medium, High, Prohibited)</span></label>
+            <textarea id="amlaRiskJustification" class="sanctions-textarea" placeholder="Describe risk factors, PEP status, unusual transaction patterns, adverse news, etc."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Enhanced Due Diligence (EDD) Required?</label>
+            <div class="radio-group" style="margin-top:6px;">
+              <label class="radio-item"><input type="radio" name="amlaEDD" value="yes"><span class="check-mark">✓</span>Yes</label>
+              <label class="radio-item"><input type="radio" name="amlaEDD" value="no"><span class="check-mark">✓</span>No</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Next Review Date</label>
+            <input type="date" id="amlaNextReview" class="form-input">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- ===== END SANCTIONS SCREENING ===== -->
+
     <!-- E-Signature Row: Bank Use Only -->
     <div class="signature-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-top: 20px;">
       <!-- E-Signature Pad 2: Account Holder -->
@@ -4587,7 +4902,53 @@ const AutoSave = {
     ws4['!merges'] = [{s:{r:0,c:0},e:{r:0,c:2}}];
     XLSX.utils.book_append_sheet(wb, ws4, 'Withdrawal Auth');
 
-    // ---- SHEET 5: Auto-Save Log ----
+    // ---- SHEET 5: Sanctions Screening & AMLA Risk Assessment ----
+    const statusLabel = s => !s ? 'Not Screened' : s.charAt(0).toUpperCase() + s.slice(1);
+    const sanctionsScreenedBy = (document.getElementById('sanctionsScreenedBy') || {}).value || '';
+    const sanctionsScreenedAt = (document.getElementById('sanctionsScreenedAt') || {}).value || '';
+    const sanctionsName       = (document.getElementById('sanctionsNameInput')   || {}).value || '';
+    const amlaRisk            = (document.getElementById('amlaRiskRating')       || {}).value || '';
+    const amlaJust            = (document.getElementById('amlaRiskJustification')|| {}).value || '';
+    const amlaReview          = (document.getElementById('amlaNextReview')       || {}).value || '';
+    const amlaEDDEl           = document.querySelector('input[name="amlaEDD"]:checked');
+    const amlaEDD             = amlaEDDEl ? (amlaEDDEl.value === 'yes' ? 'Yes' : 'No') : '';
+
+    const vals = Object.values(sanctionsState);
+    const hasHitX    = vals.some(v => v === 'hit');
+    const allClearX  = vals.every(v => v === 'clear');
+    const allSetX    = vals.every(v => v !== null);
+    const overallResult = !allSetX ? 'Incomplete' : hasHitX ? 'HIT DETECTED' : allClearX ? 'All Clear' : 'Pending Review';
+
+    const rows5s = [
+      ['SANCTIONS SCREENING & AMLA RISK ASSESSMENT'],
+      ['Generated: ' + new Date().toLocaleString('en-PH', { timeZone: 'Asia/Manila' })],
+      [],
+      ['── SANCTIONS SCREENING ──'],
+      ['Name Screened', sanctionsName],
+      ['Screened By',   sanctionsScreenedBy],
+      ['Date & Time',   sanctionsScreenedAt],
+      ['Overall Result', overallResult],
+      [],
+      ['Watchlist',                   'Result'],
+      ['UN Sanctions List',           statusLabel(sanctionsState.un)],
+      ['AMLC Watchlist',              statusLabel(sanctionsState.amlc)],
+      ['Domestic Terrorist List',     statusLabel(sanctionsState.dter)],
+      [],
+      ['── AMLA CUSTOMER RISK ASSESSMENT ──'],
+      ['Risk Rating',                 amlaRisk || 'Not set'],
+      ['EDD Required',                amlaEDD  || 'Not indicated'],
+      ['Next Review Date',            amlaReview],
+      ['Risk Factors / Justification',amlaJust || '(none entered)'],
+    ];
+    const ws5s = XLSX.utils.aoa_to_sheet(rows5s);
+    ws5s['!cols'] = [{wch:35},{wch:45}];
+    ws5s['!merges'] = [
+      {s:{r:0,c:0},e:{r:0,c:1}},
+      {s:{r:1,c:0},e:{r:1,c:1}},
+    ];
+    XLSX.utils.book_append_sheet(wb, ws5s, 'Sanctions & AMLA');
+
+    // ---- SHEET 6: Auto-Save Log ----
     const rows5 = [
       ['AUTO-SAVE LOG'], [],
       ['#', 'Date', 'Time', 'Fields Captured', 'Type'],
@@ -4595,12 +4956,12 @@ const AutoSave = {
     this.history.forEach((h, i) => {
       rows5.push([i + 1, h.date, h.time, h.fields, h.auto ? 'Auto' : 'Manual']);
     });
-    const ws5 = XLSX.utils.aoa_to_sheet(rows5);
-    ws5['!cols'] = [{wch:5},{wch:18},{wch:14},{wch:16},{wch:10}];
-    ws5['!merges'] = [{s:{r:0,c:0},e:{r:0,c:4}}];
-    XLSX.utils.book_append_sheet(wb, ws5, 'Save Log');
+    const ws6log = XLSX.utils.aoa_to_sheet(rows5);
+    ws6log['!cols'] = [{wch:5},{wch:18},{wch:14},{wch:16},{wch:10}];
+    ws6log['!merges'] = [{s:{r:0,c:0},e:{r:0,c:4}}];
+    XLSX.utils.book_append_sheet(wb, ws6log, 'Save Log');
 
-    // ---- SHEET 6: ID Photos Reference ----
+    // ---- SHEET 7: ID Photos Reference ----
     const photos6 = getPhotoDataUrls();
     const rows6 = [['ID PHOTO REFERENCE'], [], ['Slot', 'Purpose', 'Status']];
     rows6.push(['Customer Portrait', 'Section I — Profile Photo', photos6.portrait   ? 'Captured ✓' : 'Not captured']);
@@ -4609,10 +4970,10 @@ const AutoSave = {
     rows6.push(['Additional ID Doc','Section IV — Additional ID', photos6.additional  ? 'Captured ✓' : 'Not captured']);
     rows6.push([]);
     rows6.push(['NOTE: Full image data is stored in the form session. Print or Save as PDF to capture full images in the document.']);
-    const ws6 = XLSX.utils.aoa_to_sheet(rows6);
-    ws6['!cols'] = [{wch:20},{wch:30},{wch:16}];
-    ws6['!merges'] = [{s:{r:0,c:0},e:{r:0,c:2}}];
-    XLSX.utils.book_append_sheet(wb, ws6, 'ID Photos');
+    const ws7 = XLSX.utils.aoa_to_sheet(rows6);
+    ws7['!cols'] = [{wch:20},{wch:30},{wch:16}];
+    ws7['!merges'] = [{s:{r:0,c:0},e:{r:0,c:2}}];
+    XLSX.utils.book_append_sheet(wb, ws7, 'ID Photos');
 
     // Generate filename
     let filename = 'RBCCI_CIS_Individual';
@@ -4722,6 +5083,228 @@ window.addEventListener('DOMContentLoaded', () => {
   // Small delay to let the page render
   setTimeout(() => AutoSave.init(), 500);
 });
+
+const UN_SANCTIONS_DB = [{"id":"SDi.007","n":"GEDO HAMDAN AHMED","a":[]},{"id":"QDi.312","n":"AAMIR ALI CHAUDHRY","a":["a) Aamir Ali Chaudary","Aamir Ali Choudry","Amir Ali Chaudry"]},{"id":"IRi.032","n":"ABBAS RASHIDI","a":[]},{"id":"IRi.008","n":"ABBAS REZAEE ASHTIANI","a":[]},{"id":"YEi.001","n":"ABD AL-KHALIQ AL-HOUTHI","a":["a) Abd-al-Khaliq al-Huthi","Abd-al-Khaliq Badr-al-Din al Huthi","‘Abd al-Khaliq Badr al-Din al-Huthi","Abd al-Khaliq al-Huthi Low quality a.k.a.: Abu-Yunus"]},{"id":"QDi.371","n":"ABD AL-BASET AZZOUZ","a":["a) Abdelbassed Azouz","Abdul Baset Azouz"]},{"id":"QDi.380","n":"ABD AL-LATIF BIN ABDALLAH SALIH MUHAMMAD AL-KAWARI","a":["a) Abd-al-Latif Abdallah Salih al-Kawari","Abd-al-Latif Abdallah Salih al-Kuwari","Abd-al-Latif Abdallah al-Kawwari","Abd-al-Latif Abdallah al-Kawari","Abu Ali al-Kawari"]},{"id":"QDi.298","n":"ABD AL-RAHMAN OULD MUHAMMAD AL-HUSAYN OULD MUHAMMAD SALIM","a":["a) Abdarrahmane ould Mohamed el Houcein ould Mohamed Salem","ﻲﻧﺎﺘﯾرﻮﻤﻟا ﺲﻧﻮﯾ ﺦﯿﺷ (Yunis al-Mauritani; Younis al-Mauritani; Sheikh Yunis al-Mauritani; Shaykh Yunis the Mauritanian)"]},{"id":"QDi.192","n":"ABD ALLAH MOHAMED RAGAB ABDEL RAHMAN","a":["a) Abu Al-Khayr","Ahmad Hasan","Abu Jihad"]},{"id":"QDi.065","n":"ABD EL KADER MAHMOUD MOHAMED EL SAYED","a":["a) Es Sayed, Kader","Abdel Khader Mahmoud Mohamed el Sayed"]},{"id":"QDi.320","n":"ABD-AL-HAMID AL-MASLI","a":["a) Abd-al- Hamid Muhammad Abd-al-Hamid Al-Masli","Abd-al-Hamid Musalli","Hamid Masli"]},{"id":"QDi.156","n":"ABD-AL-MAJID AZIZ AL-ZINDANI","a":["a) Abdelmajid Al-Zindani","Shaykh 'Abd Al-Majid Al-Zindani","Sheikh Abd Al-Meguid Al-Zandani"]},{"id":"IQi.019","n":"ABD-AL-TAWWAB MULLAH HUWAYSH","a":[]},{"id":"SDi.005","n":"ABDEL RAHMAN JUMA BARKALLA","a":[]},{"id":"QDi.075","n":"ABDELHALIM HAFED ABDELFATTAH REMADNA","a":["Abdelhalim Remadna Low quality a.k.a.: Jalloul"]},{"id":"QDi.190","n":"ABDELKADER LAAGOUB","a":["na Low quality a.k.a.: Rachid"]},{"id":"QDi.232","n":"ABDELMALEK DROUKDEL","a":["Abou Mossaab Abdelouadoud"]},{"id":"QDi.327","n":"ABDELRAHMAN MOUHAMAD ZAFIR AL DABIDI AL JAHANI","a":["a) Abd Al-Rahman Muhammad Zafir Al-Dubaysi Al-Juhni","Abd Al-Rahman Muhammad Zafir al-Dubaysi al-Jahni","Abd Al- Rahman Muhammad Zafir al-Dubaysi al-Jahani","Abd Al-Rahman Muhammad Zafir al-Dubaysi al-Juhani","Abdulrhman Mohammed D. Aljahani","Abu al-Wafa’","Abu Anas","Abd al-Rahman Muhammad Zafir al-Dabisi al- Jahani","Abu Wafa al-Saudi","Abu al-Wafa","Abd al-Rahman Muhammad Thafir al-Jahni","Abd al-Rahman Muhammad al-Juhani",") Abdelrahman Mouhamad Zafir al Dabissi Juhan","Abdelrahman Mouhamad Zafir al Dabissi Juhani"]},{"id":"QDi.314","n":"ABDERRAHMANE OULD EL AMAR","a":["a) Ahmed el Tilemsi","Abderrahmane Ould el Amar Ould Sidahmed Loukbeiti","Ahmad Ould Amar"]},{"id":"SOi.023","n":"ABDIKADIR MOHAMED ABDIKADIR","a":[]},{"id":"CFi.012","n":"ABDOULAYE HISSENE","a":["a) Abdoulaye Issène","Abdoulaye Hissein","Hissene Abdoulaye","Abdoulaye Issène Ramadane","Abdoulaye Issene Ramadan","Issene Abdoulaye"]},{"id":"QDi.305","n":"ABDUL ROSYID RIDHO BA'ASYIR","a":["a) Abdul Rosyid Ridho Bashir","Rashid Rida Ba’aysir","Rashid Rida Bashir"]},{"id":"QDi.433","n":"ABDUL REHMAN MAKKI","a":["a) Abdur Rehman Makki","Abdur Rahman Makki","Abdul Rahman Makki","Hafiz Abdul Rahman Makki","Hafiz Abdul Rehman Makki","Hafiz Abdul Rehman"]},{"id":"QDi.268","n":"ABDUL HAQ","a":[]},{"id":"SDi.008","n":"ABDUL RAHIM HAMDAN DAGALO","a":[]},{"id":"TAi.155","n":"ABDUL AZIZ ABBASIN","a":["Abdul Aziz Mahsud"]},{"id":"TAi.038","n":"ABDUL BAQI BASIR AWAL SHAH","a":["a) Abdul Baqi (previously listed as)","ABDUL BAQI HAQQANI (name in original script: ﻲﻧﺎﻘﺣ ﻲﻗﺎﺒﻟاﺪﺒﻋ )"]},{"id":"TAi.094","n":"ABDUL BARI AKHUND","a":["Haji Mullah Sahib"]},{"id":"TAi.173","n":"ABDUL BASIR NOORZAI","a":[]},{"id":"TAi.139","n":"ABDUL GHAFAR SHINWARI","a":[]},{"id":"TAi.130","n":"ABDUL GHAFAR QURISHI ABDUL GHANI","a":["Abdul Ghaffar Qureshi"]},{"id":"TAi.024","n":"ABDUL GHANI BARADAR ABDUL AHMAD TURK","a":["a) Mullah Baradar Akhund","Abdul Ghani Baradar (previously listed as) Low quality a.k.a.: na"]},{"id":"TAi.148","n":"ABDUL HABIB ALIZAI","a":["a) Haji Agha Jan Alizai","Hajji Agha Jan","Agha Jan Alazai","Haji Loi Lala","Loi Agha","Abdul Habib","Agha Jan Alizai یﺰﯿﻟﺎﻋ نﺎﺟ ﺎﻏا (formerly listed as)"]},{"id":"TAi.142","n":"ABDUL HAI HAZEM ABDUL QADER","a":["Abdul Hai Hazem (previously listed as)"]},{"id":"QDi.120","n":"ABDUL HAKIM MURAD","a":["a) Murad, Abdul Hakim Hasim","Murad, Abdul Hakim Ali Hashim","Murad, Abdul Hakim al Hashim","Saeed Akman","Saeed Ahmed","Abdul Hakim Ali al-Hashem Murad"]},{"id":"TAi.088","n":"ABDUL JABBAR OMARI","a":[]},{"id":"TAi.034","n":"ABDUL JALIL HAQQANI WALI MOHAMMAD","a":["a) Abdul Jalil Akhund","Akhter Mohmad son of Noor Mohmad (ﺪﻤﺤﻣ رﻮﻧ ﺪﻟو ﺪﻤﺤﻣ ﺮﺘﺧا ), ( born in 1965 in Kandahar, Afghanistan passport number OR 1961825 issued on 4 Feb. 2003 by the Afghan Consulate in Quetta, Pakistan, expired 2 Feb. 2006)","Haji Gulab Gul (ﯽﺟﺎﺣ ﺪﻟو ﻞﮔ بﻼﮔ ﯽﺟﺎﺣ file:///C:/Users/rog/Downloads/consolidatedLegacyByNAME (1).html 7/157 3/16/26, 9:07 AM consolidatedLegacyByNAME (1).html ﻞﮔ تﺮﻀﺣ ) in Logar, Afghanistan (son of Haji Hazrat Gul, born in 1955, passport number TR024417 issued 20 Dec. 2003 by Central Passport Department in Kabul, Afghanistan, expired 29 Dec. 2006)","Abdul Jalil Haqqani (previously listed as)"]},{"id":"TAi.003","n":"ABDUL KABIR MOHAMMAD JAN","a":["a) A. Kabir","ABDUL KABIR MUHAMMAD JAN"]},{"id":"TAi.007","n":"ABDUL LATIF MANSUR","a":["a) Abdul Latif Mansoor","Wali Mohammad Low quality a.k.a.: na"]},{"id":"TAi.097","n":"ABDUL MANAN NYAZI","a":["a) Abdul Manan Nayazi","Abdul Manan Niazi"]},{"id":"TAi.122","n":"ABDUL MANAN MOHAMMAD ISHAK","a":[]},{"id":"QDi.018","n":"ABDUL MANAN AGHA","a":["Abdul Manan"]},{"id":"QDi.324","n":"ABDUL MOHSEN ABDALLAH IBRAHIM AL CHAREKH","a":["a) Abdul Mohsen Abdullah Ibrahim Al-Sharikh","Sanafi al Nasr"]},{"id":"TAi.128","n":"ABDUL QADEER BASIR ABDUL BASEER","a":[]},{"id":"TAi.135","n":"ABDUL QUDDUS MAZHARI","a":["Akhtar Mohammad Maz-hari (previously listed as) Low quality a.k.a.: na"]},{"id":"QDi.293","n":"ABDUL RAHIM BA'AYSIR","a":["a) Abdul Rahim Bashir","Abd Al-Rahim Ba'asyir","Abd Al-Rahim Bashir","Abdurrahim Ba'asyir","Abdurrahim Bashir","Abdul Rachim Ba'asyir","Abdul Rachim Bashir","Abdul Rochim Ba'asyir","Abdul Rochim Bashir","Abdurochim Ba'asyir","Abdurochim Bashir","Abdurrochim Ba'asyir","Abdurrochim Bashir","Abdurrahman Ba'asyir","Abdurrahman Bashir"]},{"id":"TAi.033","n":"ABDUL RAHMAN ZAHED","a":["Abdul Rehman file:///C:/Users/rog/Downloads/consolidatedLegacyByNAME (1).html 9/157 3/16/26, 9:07 AM consolidatedLegacyByNAME (1).html Zahid"]},{"id":"TAi.114","n":"ABDUL RAHMAN AGHA","a":["na Low quality a.k.a.: na"]},{"id":"TAi.049","n":"ABDUL RAHMAN AHMAD HOTTAK","a":["Hottak Sahib"]},{"id":"QDi.037","n":"ABDUL RAHMAN YASIN","a":[]},{"id":"TAi.075","n":"ABDUL RAQIB TAKHARI","a":[]},{"id":"TAi.025","n":"ABDUL RAUF KHADEM","a":["Mullah Abdul Rauf Aliza"]},{"id":"TAi.164","n":"ABDUL RAUF ZAKIR","a":["Qari Zakir"]},{"id":"TAi.053","n":"ABDUL RAZAQ AKHUND LALA AKHUND","a":[]},{"id":"TAi.027","n":"ABDUL SALAM HANAFI ALI MARDAN QUL","a":["a) Abdussalam Hanifi","Hanafi Saheb","ABDUL SALAM HANAFI (name in original script: ﻲﻔﻨﺣ مﻼﺴﻟاﺪﺒﻋ )"]},{"id":"TAi.160","n":"ABDUL SAMAD ACHEKZAI","a":["Abdul Samad"]},{"id":"TAi.162","n":"ABDUL SATAR ABDUL MANAN","a":["a) Haji Abdul Sattar Barakzai","Haji Abdul Satar","Haji Satar Barakzai","Abdulasattar"]},{"id":"TAi.098","n":"ABDUL WAHED SHAFIQ","a":[]},{"id":"TAi.133","n":"ABDUL WALI SEDDIQI","a":[]},{"id":"TAi.082","n":"ABDUL-HAQ WASSIQ","a":["a) Abdul-Haq Wasseq","Abdul Haq Wasiq","ABDULHAQ WASEEQ Low quality a.k.a.: na"]},{"id":"TAi.051","n":"ABDULHAI MOTMAEN","a":["Abdul Haq son of M. Anwar Khan (نﺎﺧ رﻮﻧا ﺪﻤﺤﻣ ﺪﻟو ﻖﺤﻟا ﺪﺒﻋ) (Afghan passport number OA462456, issued on 31 Jan. 2012 (11-11-1390) by the Afghan Consulate General in Peshawar, Pakistan)"]},{"id":"TAi.108","n":"ABDULHAI SALEK","a":[]},{"id":"TAi.141","n":"ABDULLAH HAMAD MOHAMMAD KARIM","a":["al- Hammad"]},{"id":"QDi.216","n":"ABDULLAH ANSHORI","a":["a) Abu Fatih","Thoyib, Ibnu","Toyib, Ibnu","Abu Fathi"]},{"id":"QDi.019","n":"ABDULLAH AHMED ABDULLAH EL ALFI","a":[]},{"id":"LYi.018","n":"ABDULLAH AL-SENUSSI","a":["a) Abdoullah Ould Ahmed (Passport number: B0515260; DOB: 1948; POB: Anefif (Kidal), Mali; Date of issue: 10 Jan 2012; Place of issue: Bamako, Mali; Date of expiration: 10 Jan 2017.)","Abdoullah Ould Ahmed (Mali ID Number 073/SPICRE; POB: Anefif, Mali; Date of issue: 6 Dec 2011; Place of issue: Essouck, Mali)"]},{"id":"YEi.002","n":"ABDULLAH YAHYA AL HAKIM","a":["a) Abu Ali al Hakim","Abu-Ali al-Hakim","Abdallah al-Hakim","Abu Ali Alhakim","Abdallah al-Mu’ayyad"]},{"id":"SOi.022","n":"ABDULLAHI OSMAN MOHAMED CADDOW","a":["Cabdullahi Cusman Maxamed Caddow Low quality a.k.a.:","Dhagacade","Faracade","Injineer Ismaaciil","Eng. Ismail"]},{"id":"YEi.004","n":"ABDULMALIK AL-HOUTHI","a":["Abdulmalik al-Huthi"]},{"id":"QDi.414","n":"ABDULPATTA ESCALON ABUBAKAR","a":["a) Abdulpatta Abubakar Escalon","Abdul Patta Escalon Abubakar","Abdul Patta Abu Bakar"]},{"id":"LYi.001","n":"ABDULQADER MOHAMMED AL-BAGHDADI","a":[]},{"id":"LYi.002","n":"ABDULQADER YUSEF DIBRI","a":[]},{"id":"QDi.309","n":"ABDUR REHMAN","a":["a) Abdul Rehman; Abd Ur-Rehman; Abdur Rahman","يﺪﻨﯿﺴﻟا ﻦﻤﺣﺮﻟا ﺪﺒﻋ (Abdul Rehman Sindhi; Abdul Rehman al-Sindhi; Abdur Rahman al-Sindhi; Abdur Rehman Sindhi; Abdurahman Sindhi)","يﺪﻨﺴﻟا ﷲﺪﺒﻋ (Abdullah Sindhi)"]},{"id":"IQi.004","n":"ABID HAMID MAHMUD AL-TIKRITI","a":["a) Abid Hamid Bid Hamid Mahmud","Col Abdel Hamid Mahmoud","Abed Mahmoud Hammud"]},{"id":"QDi.325","n":"ABOU MOHAMED AL ADNANI","a":["a) Yaser Khalaf Nazzal Alrawi","Jaber Taha Falah","Abou Khattab","Abou Sadeq Alrawi","Tah al Binchi","Abu Mohammed al-Adnani","Taha Sobhi Falaha","Yasser Khalaf Hussein Nazal al-Rawi","Abu Baker al-Khatab","Abu Sadek al-Rawi","Taha al-Banshi","Abu Mohamed al-Adnani","Abu-Mohammad al-Adnani al-Shami","Hajj Ibrahim"]},{"id":"SOi.011","n":"ABOUD ROGO MOHAMMED","a":["a) Aboud Mohammad Rogo","Aboud Seif Rogo","Aboud Mohammed Rogo","Sheikh Aboud Rogo","Aboud Rogo Muhammad","Aboud Rogo Mohamed"]},{"id":"QDi.186","n":"ABU RUSDAN","a":["na Low quality a.k.a.:","Abu Thoriq","Rusdjan","Rusjan","Rusydan","Thoriquddin","Thoriquiddin","Thoriquidin","Toriquddin"]},{"id":"LYi.006","n":"ABU ZAYD UMAR DORDA","a":["a) Dorda Abuzed OE","Abu Zayd Umar Hmeid Dorda"]},{"id":"LYi.007","n":"ABU BAKR YUNIS JABIR","a":["na Low quality a.k.a.: na"]},{"id":"QDi.217","n":"ABU BAKAR BA'ASYIR","a":["a) Abu Bakar Baasyir born 17 Aug. 1938 in Jombang, East Java, Indonesia","Abu Bakar Bashir born 17 Aug. 1938 in Jombang, East Java, Indonesia","Abdus Samad","Abdus Somad"]},{"id":"QDi.389","n":"ABU UBAYDAH YUSUF AL-ANABI","a":["a) Abou Obeida Youssef Al-Annabi","Abu-Ubaydah Yusuf Al-Inabi"]},{"id":"QDi.322","n":"ABUBAKAR MOHAMMED SHEKAU","a":["Abubakar Shekau"]},{"id":"QDi.436","n":"ABUBAKAR SWALLEH","a":["a) ABUBAKER SWALEH","TOM KIYURIGE"]},{"id":"SOi.012","n":"ABUBAKER SHARIFF AHMED","a":["a) Makaburi","Sheikh Abubakar Ahmed","Abubaker Shariff Ahmed","Abu Makaburi Shariff","Abubaker Shariff","Abubakar Ahmed Low quality a.k.a.: na"]},{"id":"SOi.018","n":"ABUKAR ALI ADAN","a":["a) Abukar Ali Aden","Ibrahim Afghan","Sheikh Abukar"]},{"id":"TAi.167","n":"ADAM KHAN ACHEKZAI","a":["a) Maulavi Adam Khan","Maulavi Adam"]},{"id":"QDi.068","n":"ADEL BEN AL-AZHAR BEN YOUSSEF HAMDI","a":["Adel ben al- Azhar ben Youssef ben Soltane born 14 Jul. 1970 in Tunis, Tunisia (formerly listed as)"]},{"id":"QDi.261","n":"ADEM YILMAZ","a":[]},{"id":"IQi.076","n":"ADIB SHABAN AL-ANI","a":["a) Dr. Adib Sha’ban","Adib Shaban Low quality a.k.a.: na"]},{"id":"IQi.052","n":"ADIL ABDALLAH MAHDI","a":[]},{"id":"IQi.073","n":"ADNAN S. HASAN AHMED","a":["a) Hasan Ahmed S. Adnan","Ahmed Sultan Low quality a.k.a.: na"]},{"id":"QDi.415","n":"ADNAN ABOU WALID AL-SAHRAOUI","a":["a) Lahbib Idrissi ould Sidi Abdi ould Said ould El Bachir","Adnan Abu Walid al-Sahrawi","Abu Walid al Sahrawi","Adnan Abu Walid al-Sahraoui","Adnan Abu Waleed al-Sahrawi","Lehbib Ould Ali Ould Said Ould Joumani"]},{"id":"QDi.111","n":"AGUS DWIKARNA","a":[]},{"id":"IRi.013","n":"AHMAD DERAKHSHANDEH","a":[]},{"id":"YEi.012","n":"AHMAD AL-HAMZI","a":[]},{"id":"CDi.040","n":"AHMAD MAHMOOD HASSAN","a":["a) AHMED MAHAMUD HASSAN ALIYANI","AHMAD MAHMOUD HASSAN","AHMAD MAHAMOOD HASSAN","AHMED MAHMOUD HASSAN"]},{"id":"TAi.156","n":"AHMAD ZIA AGHA","a":["a) Zia Agha","Noor Ahmad","Noor Ahmed","NOOR AHMAD AGHA Low quality a.k.a.: Sia Agha Sayeed"]},{"id":"TAi.109","n":"AHMAD JAN AKHUNDZADA SHUKOOR AKHUNDZADA","a":["a) Ahmad Jan Akhunzada","Ahmad Jan Akhund Zada"]},{"id":"TAi.105","n":"AHMAD TAHA KHALID ABDUL QADIR","a":[]},{"id":"IRi.012","n":"AHMAD VAHID DASTJERDI","a":[]},{"id":"QDi.252","n":"AHMED DEGHDEGH","a":["a) Abd El Illah","Abdellillah dit Abdellah Ahmed dit Said"]},{"id":"SOi.004","n":"AHMED ABDI AW-MOHAMED","a":["a) ABU ZUBEYR, Muktar Abdirahman","ABUZUBAIR, Muktar Abdulrahim","AW MOHAMMED, Ahmed Abdi","AW-MOHAMUD, Ahmed Abdi","GODANE","GODANI","MUKHTAR, Shaykh","ZUBEYR, Abu"]},{"id":"SOi.014","n":"AHMED DIRIYE","a":["a) Sheikh Ahmed Umar Abu Ubaidah","Sheikh Omar Abu Ubaidaha","Sheikh Ahmed Umar","Sheikh Mahad Omar Abdikarim","Abu Ubaidah","Abu Diriye"]},{"id":"QDi.028","n":"AHMED KHALFAN GHAILANI","a":["a) Ahmad, Abu Bakr","Ahmed, Abubakar","Ahmed, Abubakar K.","Ahmed, Abubakar Khalfan","Ahmed, Abubakary K.","Ahmed, Ahmed Khalfan","Ali, Ahmed Khalfan","Ghailani, Abubakary Khalfan Ahmed","Ghailani, Ahmed","Ghilani, Ahmad Khalafan","Hussein, Mahafudh Abubakar Ahmed Abdallah","Khalfan, Ahmed","Mohammed, Shariff Omar","Haythem al-Kini"]},{"id":"QDi.329","n":"AHMED ABDULLAH SALEH AL-KHAZMARI AL-ZAHRANI","a":["a) ABU MARYAM AL-ZAHRANI","ABU MARYAM AL-SAUDI","AHMED ABDULLAH S AL-ZAHRANI","AHMAD ABDULLAH SALIH AL-ZAHRANI","ABU MARYAM AL-AZADI","AHMED BIN ABDULLAH SALEH BIN AL-ZAHRANI","AHMED ABDULLAH SALEH AL-ZAHRANI AL-KHOZMRI"]},{"id":"TAi.085","n":"AHMED JAN AKHUNDZADA WAZIR","a":["a) Haji Ahmad Jan","Ahmed Jan Akhund (previously listed as)"]},{"id":"TAi.159","n":"AHMED JAN WAZIR AKHTAR MOHAMMAD","a":["a) Ahmed Jan Kuchi","Ahmed Jan Zadran"]},{"id":"TAi.166","n":"AHMED SHAH NOORZAI OBAIDULLAH","a":["a) Mullah Ahmed Shah Noorzai","Haji Ahmad Shah","Haji Mullah Ahmad Shah","Maulawi Ahmed Shah","Mullah Mohammed Shah"]},{"id":"QDi.006","n":"AIMAN MUHAMMED RABI AL-ZAWAHIRI","a":["a) Ayman Al- Zawahari","Ahmed Fuad Salim","Al Zawahry Aiman Mohamed Rabi Abdel Muaz","Al Zawahiri Ayman","Abdul Qader Abdul Aziz Abdul Moez Al Doctor","Al Zawahry Aiman Mohamed Rabi","Al Zawahry Aiman Mohamed Rabie","Al Zawahry Aiman Mohamed Robi","Dhawahri Ayman","Eddaouahiri Ayman","Nur Al Deen Abu Mohammed","Ayman Al Zawahari","Ahmad Fuad Salim"]},{"id":"LYi.009","n":"AISHA MUAMMAR MUHAMMED ABU MINYAR QADHAFI","a":["Aisha Muhammed Abdul Salam (Libya Passport number: 215215)"]},{"id":"QDi.365","n":"AKHMED RAJAPOVICH CHATAEV","a":["a) Akhmad Shishani (original script: Ахмад Шишани)","David Mayer (original script: Давид Майер)","Elmir Sene (original script: Эльмир Сене)"]},{"id":"TAi.011","n":"AKHTAR MOHAMMAD MANSOUR SHAH MOHAMMED","a":[]},{"id":"QDi.276","n":"AKRAM TURKI HISHAN AL-MAZIDIH","a":["Akram Turki Al-Hishan Low quality a.k.a.:","Abu Jarrah","Abu Akram"]},{"id":"QDi.150","n":"AL-AZHAR BEN KHALIFA BEN AHMED ROUINE","a":[]},{"id":"SDi.009","n":"AL-FATEH ABDULLAH IDRIS","a":["ABU file:///C:/Users/rog/Downloads/consolidatedLegacyByNAME (1).html 21/157 3/16/26, 9:07 AM consolidatedLegacyByNAME (1).html LULU"]},{"id":"QDi.408","n":"ALEXANDA AMON KOTEY","a":["a) Alexe Kotey","Alexanda Kote"]},{"id":"CFi.004","n":"ALFRED YEKATOM","a":["a) Alfred Yekatom Saragba","Alfred Ekatom","Alfred Saragba Low quality a.k.a.:","Colonel Rombhot","Colonel Rambo","Colonel Rambot","Colonel Rombot","Colonel Romboh"]},{"id":"QDi.196","n":"ALI SAYYID MUHAMED MUSTAFA BAKRI","a":["a) Ali Salim","Abd Al- Aziz al-Masri"]},{"id":"IQi.005","n":"ALI HASSAN AL-MAJID AL-TIKRITI","a":[]},{"id":"IQi.061","n":"ALI SADDAM HUSSEIN AL-TIKRITI","a":[]},{"id":"IQi.064","n":"ALI BARZAN IBRAHIM HASAN AL-TIKRITI","a":[]},{"id":"QDi.353","n":"ALI BEN TAHER BEN FALEH OUNI HARZI","a":[]},{"id":"CFi.010","n":"ALI KONY","a":[]},{"id":"QDi.423","n":"ALI MAYCHOU","a":["a) Abderahmane al Maghrebi","Abderrahmane le Marocain"]},{"id":"CFi.015","n":"ALI DARASSA","a":["a) Ali Darassa Mahamat","Ali Mahamat Darassa","Ali Daras","Ali Darrassa"]},{"id":"SOi.021","n":"ALI MOHAMED RAGE","a":["a) Ali Mohammed Rage","Ali Dheere","Ali Dhere","Ali Mohamed Rage Cali Dheer","Ali Mohamud Rage Low quality a.k.a.: na"]},{"id":"IRi.041","n":"ALI AKBAR TABATABAEI","a":["a) Sayed Akbar Tahmaesebi; Syed Akber Tahmaesebi","Ali Akber Tabatabaei; Ali Akber Tahmaesebi; Ali Akbar Tahmaesebi"]},{"id":"IRi.004","n":"ALI AKBAR AHMADIAN","a":["Ali Akbar Ahmedian"]},{"id":"IRi.021","n":"ALI HAJINIA LEILABADI","a":[]},{"id":"QDi.384","n":"ALI MUSA AL-SHAWAKH","a":[]},{"id":"TAi.016","n":"ALLAH DAD TAYEB WALI MUHAMMAD","a":["a) Allah Dad Tayyab","Allah Dad Tabeeb"]},{"id":"TAi.021","n":"ALLAH DAD MATIN","a":["a) Allahdad (previously listed as)","Shahidwror"]},{"id":"QDi.229","n":"ALY SOLIMAN MASSOUD ABDUL SAYED","a":["a) Ibn El Qaim","Mohamed Osman"]},{"id":"QDi.425","n":"AMADOU KOUFA","a":["a) Amadou Barry","Amadou Kouffa","Hamadoun Koufa","Hamadoun Kouffa","Hamadou Koufa","Hamadou Kouffa Low quality a.k.a.: na"]},{"id":"LYi.005","n":"AMID HUSAIN AL KUNI","a":["na Low quality a.k.a.: na"]},{"id":"QDi.002","n":"AMIN MUHAMMAD UL HAQ SAAM KHAN","a":["a) Al-Haq, Amin","Amin, Muhammad"]},{"id":"TAi.107","n":"AMINULLAH AMIN QUDDUS","a":["a) Muhammad Yusuf","Aminullah Amin (previously listed as)"]},{"id":"IRi.030","n":"AMIR RAHIMI","a":[]},{"id":"TAi.145","n":"AMIR ABDULLAH","a":[]},{"id":"TAi.026","n":"AMIR KHAN MOTAQI","a":["a) Amir Khan Muttaqi","AMIR KHAN MUTAQI"]},{"id":"IRi.005","n":"AMIR MOAYYED ALAI","a":[]},{"id":"QDi.250","n":"AMOR MOHAMED GHEDEIR","a":["a) Abdelhamid Abou Zeid","Youcef Adel","Abou Abdellah","Abid Hammadou born 12 Dec. 1965 in Algeria (previously listed as)"]},{"id":"QDi.361","n":"AMRU AL-ABSI","a":["a) Amr al Absi","Abu al Athir Amr al Absi"]},{"id":"QDi.331","n":"ANDERS CAMEROON OSTENSVIG DALE","a":[]},{"id":"QDi.241","n":"ANGELO RAMIREZ TRINIDAD","a":["a) Calib Trinidad","Kalib Trinidad"]},{"id":"QDi.348","n":"ANGGA DIMAS PERSHADA","a":[]},{"id":"QDi.419","n":"ANJEM CHOUDARY","a":[]},{"id":"GBi.005","n":"ANTÓNIO INJAI","a":["António Indjai"]},{"id":"QDi.283","n":"ANWAR NASSER ABDULLA AL-AULAQI","a":["a) Anwar al-Aulaqi","Anwar al-Awlaki","Anwar al-Awlaqi","Anwar Nasser Aulaqi","Anwar Nasser Abdullah Aulaqi","Anwar Nasser Abdulla Aulaqi"]},{"id":"CDi.039","n":"APOLLINAIRE HAKIZIMANA","a":["AMIKWE LEPIC"]},{"id":"QDi.356","n":"AQSA MAHMOOD","a":[]},{"id":"TAi.030","n":"AREFULLAH AREF GHAZI MOHAMMAD","a":["Arefullah Aref (formerly listed as)"]},{"id":"QDi.271","n":"ARIF QASMANI","a":["a) Muhammad Arif Qasmani","Muhammad ‘Arif Qasmani","Mohammad Arif Qasmani","Arif Umer","Qasmani Baba","Memon Baba","Baba Ji"]},{"id":"QDi.119","n":"ARIS MUNANDAR","a":["na Low quality a.k.a.: na"]},{"id":"QDi.187","n":"ARIS SUMARSONO","a":[]},{"id":"QDi.357","n":"ASEEL MUTHANA","a":[]},{"id":"QDi.343","n":"ASHRAF MUHAMMAD YUSUF 'UTHMAN 'ABD AL-SALAM","a":["a) Ashraf Muhammad Yusif 'Uthman 'Abd-al- Salam","Ashraf Muhammad Yusuf 'Abd-al-Salam","Ashraf Muhammad Yusif 'Abd al-Salam"]},{"id":"QDi.432","n":"ASHRAF AL-QIZANI","a":[]},{"id":"QDi.396","n":"ASLAN AVGAZAROVICH BYUTUKAEV","a":[]},{"id":"TAi.070","n":"ATIQULLAH WALI MOHAMMAD","a":["Atiqullah (previously listed as)"]},{"id":"TAi.009","n":"ATTIQULLAH AKHUND","a":["na Low quality a.k.a.: na"]},{"id":"IQi.083","n":"AYMAN SABAWI IBRAHIM HASAN AL-TIKRITI","a":["a) Aiman Sabawi Ibrahim Hasan Al-Tikriti","Ayman Sab’awi Ibrahim Hasan Al-Tikriti","Ayman Sabawi Ibrahim Hassan Al-Tikriti","Qais Muhammad Salman"]},{"id":"QDi.397","n":"AYRAT NASIMOVICH VAKHITOV","a":["Salman Bulgarskiy (original script: Салман Булгарский)"]},{"id":"QDi.311","n":"AYYUB BASHIR","a":["a) Alhaj Qari Ayub Bashar","Qari Muhammad Ayub"]},{"id":"IRi.003","n":"AZIM AGHAJANI","a":["Azim Adhajani; Azim Agha-Jani"]},{"id":"TAi.121","n":"AZIZIRAHMAN ABDUL AHAD","a":["AZIZURAHMAN ABDUL AHAD"]},{"id":"QDi.330","n":"AZZAM ABDULLAH ZUREIK AL-MAULID AL-SUBHI","a":["a) Mansur al- Harbi","Azzam al-Subhi","Azam Abdallah Razeeq al Mouled Alsbhua","Abu Muslem al-Maky","Abu Suliman al- Harbi","Abu Abdalla al-Harbi","Azam A.R. Alsbhua"]},{"id":"LYi.026","n":"Abd Al-Rahman SALIM IBRAHIM AL-MILAD","a":["a) Abdurahman Salem Ibrahim Milad","ABDULRAHMAN SALIM MILAD KASHLAF"]},{"id":"SOi.017","n":"Abdifatah Abubakar Abdi","a":["Musa Muhajir Low quality a.k.a.: na"]},{"id":"SOi.016","n":"Ahmad Iman Ali","a":["a) Sheikh Ahmed Iman Ali","Shaykh Ahmad Iman Ali","Ahmed Iman Ali","Abu Zinira"]},{"id":"LYi.023","n":"Ahmad Oumar Imhamad al-Fitouri","a":["na Low quality a.k.a.:","Al-Dabachi","Al Ammu","The Uncle","Al-Ahwal","Al Dabbashi"]},{"id":"QDi.426","n":"Amir Muhammad Sa’id Abdal-Rahman al-Salbi","a":["a) Abu Ibrahim al-Hashimi al-Qurashi","Hajji Abdallah","Abu ‘Umar al-Turkmani","Abdullah Qardash","Abu ‘Abdullah Qardash","al-Hajj Abdullah Qardash","Hajji Abdullah Al-Afari","`Abdul Amir Muhammad Sa'id Salbi","Muhammad Sa'id `Abd-al-Rahman al-Mawla","Amir Muhammad Sa’id ‘Abd-al-Rahman Muhammad al-Mula","Amir Muhammad Sa’id Abdal-Rahman al-Mawla (previously listed as)"]},{"id":"QDi.424","n":"BAH AG MOUSSA","a":["a) Ag Mossa","Ammi Salim"]},{"id":"IRi.009","n":"BAHMANYAR MORTEZA BAHMANYAR","a":[]},{"id":"TAi.161","n":"BAKHT GUL","a":[]},{"id":"QDi.349","n":"BAMBANG SUKIRNO","a":[]},{"id":"IQi.011","n":"BARZAN ABD AL-GHAFUR SULAIMAN MAJID AL-TIKRITI","a":["Barzan Razuki Abd al- Ghafur"]},{"id":"IQi.038","n":"BARZAN IBRAHIM HASSAN AL-TIKRITI","a":[]},{"id":"IQi.085","n":"BASHAR SABAWI IBRAHIM HASAN AL-TIKRITI","a":["a) Bashar Sab’awi Ibrahim Hasan Al- Tikriti","Bashir Sab’awi Ibrahim Al-Hasan Al-Tikriti","Bashir Sabawi Ibrahim Al-Hassan Al-Tikriti","Bashar Sabawi Ibrahim Hasan Al-Bayjat","Ali Zafir ‘Abdullah’ in Baghdad, Iraq (in Baghdad, Iraq (Nationality - Iraq))","BASHAR AL-NASIRI"]},{"id":"SOi.006","n":"BASHIR MOHAMED MAHAMOUD","a":["a) Bashir Mohamed Mahmoud","Bashir Mahmud Mohammed","Bashir Mohamed Mohamud","Bashir Mohamed Mohamoud","Bashir Yare","Bashir Qorgab","Gure Gap","Abu Muscab","Qorgab"]},{"id":"QDi.399","n":"BASSAM AHMAD AL-HASRI","a":["Bassam Ahmad Husari"]},{"id":"CDi.019","n":"BAUDOIN NGARUYE WA MYAMURO","a":["Colonel Baudoin NGARUYE"]},{"id":"IRi.006","n":"BEHMAN ASGARPOUR","a":["Behman Asgharpour; Behman Asgharpur"]},{"id":"CDi.038","n":"BERNARD MAHESHE BYAMUNGU","a":[]},{"id":"CFi.014","n":"BI SIDI SOULEMAN","a":["a) Sidiki","“General” Sidiki","Sidiki Abbas","Souleymane Bi Sidi","Bi Sidi Soulemane"]},{"id":"QDi.009","n":"BILAL BIN MARWAN","a":[]},{"id":"CDi.030","n":"BOSCO TAGANDA","a":["a) Bosco Ntaganda","Bosco Ntagenda","General Taganda"]},{"id":"QDi.375","n":"BOUBAKER BEN HABIB BEN AL-HAKIM","a":["a) Boubakeur el-Hakim","Boubaker el Hakim"]},{"id":"QDi.058","n":"BOUBEKEUR BOULGHITI","a":["Boubakeur Boulghit"]},{"id":"CDi.010","n":"CALLIXTE MBARUSHIMANA","a":[]},{"id":"KPi.064","n":"CH'OE SO’K MIN","a":[]},{"id":"KPi.007","n":"CHANG MYONG-CHIN","a":[]},{"id":"KPi.037","n":"CHANG CHANG HA","a":["Jang Chang Ha"]},{"id":"KPi.038","n":"CHO CHUN RYONG","a":[]},{"id":"KPi.040","n":"CHO IL U","a":["a) Cho Il Woo","Cho Ch’o’l","Jo Chol"]},{"id":"KPi.041","n":"CHO YON CHUN","a":[]},{"id":"KPi.014","n":"CHOE SONG IL","a":["na Low quality a.k.a.: na"]},{"id":"KPi.042","n":"CHOE HWI","a":[]},{"id":"KPi.054","n":"CHOE CHUN YONG","a":["Ch’oe Ch’un-yo’ng"]},{"id":"KPi.013","n":"CHOE CHUN-SIK","a":["a) Choe Chun Sik","Ch’oe Ch’un Sik"]},{"id":"KPi.065","n":"CHU HYO’K","a":["Ju Hyok"]},{"id":"GBi.003","n":"CRANHA DANFA","a":[]},{"id":"GBi.009","n":"DABA NAUALNA","a":["Daba Na Walna"]},{"id":"IRi.002","n":"DAWOOD AGHA-JANI","a":[]},{"id":"QDi.135","n":"DAWOOD IBRAHIM KASKAR","a":["a) Dawood Ebrahim","Sheikh Dawood Hassan","Abdul Hamid Abdul Aziz","Anis Ibrahim","Aziz Dilip","Daud Hasan Shaikh Ibrahim Kaskar","Daud Ibrahim Memon Kaskar","Dawood Hasan Ibrahim Kaskar","Dawood Ibrahim Memon","Dawood Sabri","Kaskar Dawood Hasan","Shaikh Mohd Ismail Abdul Rehman","Dowood Hassan Shaikh Ibrahim","Dawood Bhai"]},{"id":"CDi.027","n":"DIEUDONNÉ OZIA MAZIO","a":[]},{"id":"HTi.008","n":"DIMITRI HERARD","a":[]},{"id":"TAi.043","n":"DIN MOHAMMAD HANIF","a":["a) Qari Din Mohammad","Iadena Mohammad (born 1 Jan. 1969)","IADENAMOHAMMAD NAZRI MOHAMMAD"]},{"id":"QDi.242","n":"DINNO AMOR ROSALEJOS PAREJA","a":["a) Johnny Pareja","Khalil Pareja"]},{"id":"QDi.129","n":"DJAMEL MOUSTFA","a":["a) Kalad Belkasam born 31 Dec. 1979","Mostafa Djamel born 31 Dec. 1979 in Maskara, Algeria","Mostefa Djamel born 26 Sep. 1973 in Mahdia, Algeria","Mustafa Djamel born 31 Dec. 1979 in Mascara, Algeria","Balkasam Kalad born 26 Aug. 1973 in Algiers, Algeria","Bekasam Kalad born 26 Aug. 1973 in Algiers, Algeria","Belkasam Kalad born 26 Aug. 1973 in Algiers, Algeria","Damel Mostafa born 31 Dec. 1979 in Algiers, Algeria","Djamal Mostafa born 31 Dec. 1979 in Maskara, Algeria","Djamal Mostafa born 10 Jun. 1982","Djamel Mostafa born 31 Dec. 1979 in Maskara, Algeria","Djamel Mostafa born 31 Dec. 1979 in Algiers, Algeria","Fjamel Moustfa born 28 Sep. 1973 in Tiaret, Algeria","Djamel Mustafa born 31 Dec. 1979","Ali Barkani born 22 Aug. 1973 in Morocco","Djamel Mustafa born 31 Dec. 1979 in Mascara, Algeria"]},{"id":"QDi.155","n":"DJAMEL LOUNICI","a":["Jamal Lounici Low quality a.k.a.: na"]},{"id":"QDi.313","n":"DJAMEL AKKACHA","a":["a) Yahia Abou el Hoummam","Yahia Abou el Hammam"]},{"id":"QDi.290","n":"DOKU KHAMATOVICH UMAROV","a":["a) Lom- ali Butayev (Butaev) born 1955","Dokka Umarov born 13 Apr. 1964","Dokka Umarov born 13 Apr. 1965 Low quality a.k.a.: na"]},{"id":"TAi.092","n":"DOST MOHAMMAD","a":["Doost Mohammad Low quality a.k.a.: na"]},{"id":"IRi.025","n":"EHSAN MONAJEMI","a":["Ihsan Monajemi"]},{"id":"TAi.083","n":"EHSANULLAH SARFIDA HESAMUDDIN AKHUNDZADA","a":[]},{"id":"QDi.409","n":"ELSHAFEE EL SHEIKH","a":["a) El Shafee Elsheikh","Alshafee El-Sheikh"]},{"id":"QDi.340","n":"EMILIE EDWIGE KONIG","a":[]},{"id":"QDi.430","n":"EMRAAN ALI","a":["na Low quality a.k.a.: Abu Jihad TNT"]},{"id":"CDi.001","n":"ERIC BADEGE","a":[]},{"id":"GBi.008","n":"ESTÊVÃO NA MENA","a":[]},{"id":"CFi.008","n":"EUGÈNE BARRET NGAÏKOSSET","a":["a) Eugene Ngaikosset","Eugene Ngaikoisset","Eugene Ngakosset","Eugene Barret Ngaikosse","Eugene Ngaikouesset"]},{"id":"TAi.064","n":"EZATULLAH HAQQANI KHAN SAYYID","a":["Ezatullah Haqqani (previously listed as) Low quality a.k.a.: na"]},{"id":"LYi.021","n":"Ermias Alem","a":[]},{"id":"IQi.047","n":"FADIL MAHMUD GHARIB","a":[]},{"id":"TAi.036","n":"FAIZ","a":[]},{"id":"TAi.153","n":"FAIZULLAH KHAN NOORZAI","a":["a) Haji Faizullah Noor","Faizullah Noorzai Akhtar Mohammed Mira Khan (previously listed as)","ىزرﻮﻧ نﺎﺧ ﷲ ﺾﯿﻓ ﻰﺟﺎﺣ (Hajji Faizullah Khan Noorzai; Haji Faizuulah Khan Norezai; Haji Faizullah Khan; Haji Fiazullah)","Haji Faizullah Noori"]},{"id":"QDi.403","n":"FARED SAAL","a":[]},{"id":"SOi.008","n":"FARES MOHAMMED MANA'A","a":["a) Faris Mana'a","Fares Mohammed Manaa"]},{"id":"QDi.203","n":"FARHAD KANABI AHMAD","a":["a) Kaua Omar Achmed","Kawa Hamawandi (previously listed as)","Kawa Omar Ahmed"]},{"id":"QDi.188","n":"FAYCAL BOUGHANEMI","a":["a) Faical Boughanmi","Faysal al-Bughanimi"]},{"id":"QDi.392","n":"FAYSAL AHMAD BIN ALI AL-ZAHRANI","a":["Faisal Ahmed Ali Alzahrani Low quality a.k.a.:","Abu Sarah al-Saudi","Abu Sara Zahrani"]},{"id":"QDi.303","n":"FAZAL RAHIM","a":[]},{"id":"QDi.273","n":"FAZEEL-A-TUL SHAYKH ABU MOHAMMED AMEEN AL-PESHAWARI","a":["a) Shaykh Aminullah","Sheik Aminullah","Abu Mohammad Aminullah Peshawari","Abu Mohammad Amin Bishawri","Abu Mohammad Shaykh Aminullah Al-Bishauri","Shaykh Abu Mohammed Ameen al-Peshawari","Shaykh Aminullah Al-Peshawari Low quality a.k.a.: na"]},{"id":"TAi.157","n":"FAZL RABI","a":["a) Fazl Rabbi","Fazal Rabi","Faisal Rabbi"]},{"id":"TAi.023","n":"FAZL MOHAMMAD MAZLOOM","a":["a) Molah Fazl","Fazel Mohammad Mazloom","MOHAMMAD FADEL AAKHUND ( name in original script: ﺪﻧﻮﺧآ ﻞﺿﺎﻓ ﺪﻤﺤﻣ) Low quality a.k.a.: na"]},{"id":"QDi.243","n":"FELICIANO SEMBORIO DELOS REYES JR.","a":["a) Abubakar Abdillah","Abdul Abdillah"]},{"id":"CDi.023","n":"FELICIEN NSANZUBUKIRE","a":["Fred Irakeza"]},{"id":"IRi.001","n":"FEREIDOUN ABBASI-DAVANI","a":[]},{"id":"CDi.021","n":"FLORIBERT NGABU NJABU","a":["a) Floribert Njabu Ngabu","Floribert Ndjabu","Floribert Ngabu Ndjabu"]},{"id":"CDi.002","n":"FRANK KAKOLELE BWAMBALE","a":["a) FRANK KAKORERE","FRANK KAKORERE BWAMBALE","AIGLE BLANC"]},{"id":"CFi.001","n":"FRANÇOIS YANGOUVONDA BOZIZÉ","a":["a) Bozize Yangouvonda","Samuel Peter Mudde (born 16 Dec. 1948, in Izo South Sudan)"]},{"id":"SOi.005","n":"FUAD MOHAMED KHALAF","a":["a) Fuad Mohamed Khalif","Fuad Mohamed Qalaf","Fuad Mohammed Kalaf","Fuad Mohamed Kalaf","Fuad Mohammed Khalif","Fuad Khalaf","Fuad Shongale","Fuad Shongole","Fuad Shangole","Fuad Songale","Fouad Shongale","Fuad Muhammad Khalaf Shongole Low quality a.k.a.: na"]},{"id":"LYi.022","n":"Fitiwi Abdelrazak","a":["a) Abdurezak","Abdelrazaq","Abdulrazak","Abdrazzak"]},{"id":"SSi.001","n":"GABRIEL JOK RIAK MAKOL","a":["a) Gabriel Jok","Jok Riak","Jock Riak"]},{"id":"SDi.001","n":"GAFFAR MOHAMMED ELHASSAN","a":["Gaffar Mohmed Elhassan"]},{"id":"CDi.003","n":"GASTON IYAMUREMYE","a":[]},{"id":"CDi.006","n":"GERMAIN KATANGA","a":[]},{"id":"QDi.401","n":"GHALIB ABDULLAH AL-ZAIDI","a":[]},{"id":"IRi.040","n":"GHASEM SOLEYMANI","a":[]},{"id":"IQi.051","n":"GHAZI HAMMUD AL-UBAIDI","a":[]},{"id":"QDi.277","n":"GHAZY FEZZA HISHAN AL-MAZIDIH","a":["a) Ghazy Fezzaa Hishan","Mushari Abd Aziz Saleh Shlash"]},{"id":"CDi.033","n":"GUIDON SHIMIRAY MWISSA","a":[]},{"id":"TAi.147","n":"GUL AGHA ISHAKZAI","a":["a) Mullah Gul Agha","Mullah Gul Agha Akhund","HIDAYATULLAH BADRI","HEDAYATULLAH HEDAYAT","HEDAYATULLAH BADRI (name in original script: يرﺪﺑ ﷲ ﺖﯾاﺪھ)"]},{"id":"TAi.140","n":"GUL AHMAD HAKIMI","a":[]},{"id":"QDi.372","n":"GULMUROD KHALIMOV","a":[]},{"id":"QDi.218","n":"GUN GUN RUSMAN GUNAWAN","a":["a) Gunawan, Rusman","Abd Al-Hadi","Abdul Hadi","Abdul Karim","Bukhori","Bukhory"]},{"id":"CDi.035","n":"GÉDÉON KYUNGU MUTANGA WA BAFUNKWA KANONGA","a":[]},{"id":"CFi.005","n":"HABIB SOUSSOU","a":["Soussou Abib"]},{"id":"QDi.177","n":"HABIB BEN AHMED AL-LOUBIRI","a":["Al-Habib ben Ahmad ben al-Tayib al-Lubiri"]},{"id":"TAi.084","n":"HABIBULLAH RESHAD","a":[]},{"id":"QDi.307","n":"HAFIZ ABDUL SALAM BHUTTAVI","a":[]},{"id":"QDi.263","n":"HAFIZ MUHAMMAD SAEED","a":["a) Hafiz Mohammad Sahib","Hafiz Mohammad Sayid","Hafiz Muhammad","Hafiz Saeed","Hafez Mohammad Saeed","Hafiz Mohammad Sayeed","Tata Mohammad Syeed","Mohammad Sayed","Muhammad Saeed"]},{"id":"QDi.265","n":"HAJI MUHAMMAD ASHRAF","a":["a) Haji M. Ashraf","Muhammad Ashraf Manshah","Muhammad Ashraf Munsha"]},{"id":"IQi.059","n":"HALA SADDAM HUSSEIN AL-TIKRITI","a":[]},{"id":"IRi.010","n":"HALEH BAKHTIAR","a":["Halen Bakhtiar; Haleh Bakhtiari; Haleh Bakhtiyar"]},{"id":"QDi.315","n":"HAMADA OULD MOHAMED EL KHAIRY","a":["a) Hamada Ould Mohamed Lemine Ould Mohamed el Khairy","Ould Kheirou","Hamad el Khairy"]},{"id":"QDi.143","n":"HAMADI BEN ABDUL AZIZ BEN ALI BOUYEHIA","a":["a) Gamel Mohamed born 25 May 1966 in Morocco","Abd el Wanis Abd Gawwad Abd el Latif Bahaa born 9 May 1986 in Egypt","Mahmoud Hamid"]},{"id":"TAi.044","n":"HAMDULLAH NOMANI","a":[]},{"id":"TAi.111","n":"HAMDULLAH SUNANI","a":["Sanani (previously listed as)"]},{"id":"TAi.143","n":"HAMDULLAH ALLAH NOOR","a":[]},{"id":"QDi.236","n":"HAMID ABDALLAH AHMAD AL-ALI","a":["a) Dr. Hamed Abdullah Al-Ali","Hamed Al-'Ali","Hamed bin 'Abdallah Al-'Ali","Hamid 'Abdallah Al-'Ali","Hamid 'Abdallah Ahmad Al-'Ali","Hamid bin Abdallah Ahmed Al-Ali","Hamid Abdallah Ahmed Al-Ali"]},{"id":"IQi.017","n":"HAMID RAJA SHALAH AL-TIKRITI","a":["a) Hassan Al-Tikriti","Hamid Raja-Shalah Hassum Al-Tikriti"]},{"id":"QDi.326","n":"HAMID HAMAD HAMID AL-‘ALI","a":[]},{"id":"IRi.023","n":"HAMID-REZA MOHAJERANI","a":["Hamid Reza Mohajerani Araghi Low quality a.k.a.: na"]},{"id":"TAi.118","n":"HAMIDULLAH AKHUND SHER MOHAMMAD","a":["a) Janat Gul","Hamidullah Akhund (previously listed as)","SAEED HAMIDULLAH"]},{"id":"QDi.421","n":"HAMZA USAMA MUHAMMAD BIN LADEN","a":["na Low quality a.k.a.: na"]},{"id":"KPi.005","n":"HAN YU-RO","a":[]},{"id":"KPi.055","n":"HAN JANG SU","a":["Chang-Su Han"]},{"id":"IQi.007","n":"HANI ABD-AL-LATIF TILFAH AL-TIKRITI","a":["na Low quality a.k.a.: na"]},{"id":"QDi.198","n":"HANI AL-SAYYID AL-SEBAI YUSIF","a":["a) Hani Yousef Al-Sebai","Hani Youssef","Hany Youseff","Hani Yusef","Hani al-Sayyid Al-Sabai","Hani al-Sayyid El Sebai","Hani al-Sayyid Al Siba'i","Hani al-Sayyid El Sabaay","El-Sababt","Abu Tusnin","Abu Akram","Hani El Sayyed Elsebai Yusef","Abu Karim","Hany Elsayed Youssef"]},{"id":"LYi.010","n":"HANNIBAL MUAMMAR QADHAFI","a":[]},{"id":"CFi.007","n":"HAROUN GAYE","a":["a) Haroun Geye","Aroun Gaye","Aroun Geye"]},{"id":"QDi.385","n":"HASAN AL-SALAHAYN SALIH AL-SHA’ARI","a":["Husayn al-Salihin Salih al- Sha‘iri"]},{"id":"SOi.002","n":"HASSAN DAHIR AWEYS","a":["a) ALI, Sheikh Hassan Dahir Aweys","AWES, Hassan Dahir","AWES, Shaykh Hassan Dahir","AWEYES, Hassen Dahir","AWEYS, Ahmed Dahir","AWEYS, Sheikh","AWEYS, Sheikh Hassan Dahir","DAHIR, Aweys Hassan","IBRAHIM, Mohammed Hassan","OAIS, Hassan Tahir","UWAYS, Hassan Tahir","HASSAN, Sheikh"]},{"id":"SOi.003","n":"HASSAN ABDULLAH HERSI AL-TURKI","a":["a) AL- TURKI, Hassan","TURKI, Hassan","TURKI, Hassan Abdillahi Hersi","TURKI, Sheikh Hassan","XIRSI, Xasan Cabdilaahi","XIRSI, Xasan Cabdulle"]},{"id":"SOi.009","n":"HASSAN MAHAT OMAR","a":["a) Hassaan Hussein Adam","Hassane Mahad Omar","Xassaan Xuseen Adan","Asan Mahad Cumar","Abu Salman","Abu Salmaan","Sheikh Hassaan Hussein"]},{"id":"QDi.042","n":"HASSAN DAHIR AWEYS","a":["a) Ali, Sheikh Hassan Dahir Aweys","Awes, Shaykh Hassan Dahir","Hassen Dahir Aweyes","Ahmed Dahir Aweys","Mohammed Hassan Ibrahim","Aweys Hassan Dahir","Hassan Tahir Oais","Hassan Tahir Uways","Hassan Dahir Awes Low quality a.k.a.:","Sheikh Aweys","Sheikh Hassan","Sheikh Hassan Dahir Aweys"]},{"id":"TAi.014","n":"HIDAYATULLAH","a":["Abu Turab Low quality a.k.a.: na"]},{"id":"IQi.028","n":"HIKMAT MIZBAN IBRAHIM AL-AZZAWI","a":[]},{"id":"QDi.244","n":"HILARION DEL ROSARIO SANTOS","a":["a) Akmad Santos","Ahmed Islam","Ahmad Islam Santos","Hilarion Santos, III (third)","Hilarion Del Rosario Santos, III (third)","Abu Abdullah Santos","Faisal Santos"]},{"id":"IRi.038","n":"HOSEIN SALIMI","a":[]},{"id":"IRi.028","n":"HOUSHANG NOBARI","a":[]},{"id":"IQi.039","n":"HUDA SALIH MAHDI AMMASH","a":[]},{"id":"QDi.394","n":"HUSAYN JUAYTHINI","a":[]},{"id":"KPi.003","n":"HWANG SOK-HWA","a":[]},{"id":"KPi.015","n":"HYON KWANG IL","a":["Hyon Gwang Il"]},{"id":"QDi.291","n":"IBRAHIM HASSAN TALI AL-ASIRI","a":["a) Ibrahim Hassan Tali Asiri (يﺮﯿﺴﻋ ﻊﻟﺎط ﻦﺴﺣ ﻢﯿھاﺮﺑإ)","Ibrahim Hasan Talea Aseeri","Ibrahim Hassan al-Asiri","Ibrahim Hasan Tali Asiri","Ibrahim Hassan Tali Assiri","Ibrahim Hasan Tali'A 'Asiri","Ibrahim Hasan Tali al-'Asiri","Ibrahim al-'Asiri","Ibrahim Hassan Al Asiri"]},{"id":"IQi.013","n":"IBRAHIM AHMAD ABD AL-SATTAR MUHAMMED AL-TIKRITI","a":[]},{"id":"IQi.084","n":"IBRAHIM SABAWI IBRAHIM HASAN AL-TIKRITI","a":["a) Ibrahim Sab’awi Ibrahim Hasan Al-Tikriti","Ibrahim Sabawi Ibrahim Hassan Al-Tikriti","Ibrahim Sabawi Ibrahim Al-Hassan Al-Tikriti","Muhammad Da’ud Salman in Baghdad, Iraq ((DPOB - 1977) - Passport No. 284173, expires 21 August 2005 (Iraq))"]},{"id":"QDi.344","n":"IBRAHIM 'ISA HAJJI MUHAMMAD AL-BAKR","a":["a) Ibrahim 'Issa Haji Muhammad al- Bakar","Ibrahim 'Isa Haji al-Bakr","Ibrahim Issa Hijji Mohd Albaker","Ibrahim Issa Hijji Muhammad al-Baker","Ibrahim 'Issa al-Bakar","Ibrahim al-Bakr"]},{"id":"QDi.332","n":"IBRAHIM SULEIMAN HAMAD AL-HABLAIN","a":["Barahim Suliman H. al Hblian"]},{"id":"QDi.299","n":"IBRAHIM AWWAD IBRAHIM ALI AL-BADRI AL-SAMARRAI","a":["Dr. Ibrahim ‘Awwad Ibrahim ’Ali al-Badri al-Samarrai’ (born in 1971 in Samarra, Iraq (Ibrahim ‘Awad Ibrahim al-Badri al-Samarrai; Ibrahim ‘Awad Ibrahim al- Samarra’i; Dr. Ibrahim Awwad Ibrahim al-Samarra’i))"]},{"id":"QDi.057","n":"IBRAHIM ALI ABU BAKR TANTOUSH","a":["a) Abd al-Muhsin","Ibrahim Ali Muhammad Abu Bakr","Abdul Rahman","Abu Anas","Ibrahim Abubaker Tantouche","Ibrahim Abubaker Tantoush","‘Abd al-Muhsi","‘Abd al-Rahman","Abdel Ilah Sabri (false identity related to fraudulent South African identification number 6910275240086 linked to South African passport number 434021161, both documents have been confiscated)"]},{"id":"GBi.001","n":"IBRAIMA CAMARÁ","a":[]},{"id":"GBi.004","n":"IDRISSA DJALÓ","a":["file:///C:/Users/rog/Downloads/consolidatedLegacyByNAME (1).html 53/157 3/16/26, 9:07 AM consolidatedLegacyByNAME (1).html Idriça Djaló"]},{"id":"CDi.016","n":"IGNACE MURWANASHYAKA","a":[]},{"id":"QDi.139","n":"IMED BEN MEKKI ZARKAOUI","a":["a) Dour Nadre born 15 Jan. 1974 in Morocco","Dour Nadre born 15 Jan. 1973 in Morocco","Daour Nadre born 31 Mar. 1975 in Algeria","Imad ben al-Mekki ben al-Akhdar al-Zarkaoui (previously listed as)"]},{"id":"CDi.004","n":"INNOCENT KAINA","a":["Colonel Innocent KAINA"]},{"id":"CDi.031","n":"INNOCENT ZIMURINDA","a":[]},{"id":"IQi.071","n":"INTISSAR AL-UBAYDI","a":[]},{"id":"CDi.011","n":"IRUTA DOUGLAS MPAMO","a":[]},{"id":"QDi.076","n":"ISAM ALI MOHAMED ALOUCHE","a":["Mansour Thaer born 21 Mar. 1974 in Baghdad, Iraq"]},{"id":"QDi.364","n":"ISLAM SEIT-UMAROVICH ATABIEV","a":[]},{"id":"QDi.204","n":"ISNILON TOTONI HAPILON","a":["a) Isnilon Hapilun","Isnilun Hapilun","Tuan Isnilon"]},{"id":"QDi.400","n":"IYAD NAZMI SALIH KHALIL","a":["a) Ayyad Nazmi Salih Khalil","Eyad Nazmi Saleh Khalil"]},{"id":"QDi.316","n":"IYAD AG GHALI","a":["Sidi Mohamed Arhali born 1 Jan. 1958 in Bouressa, Bourem Region, Mali"]},{"id":"IQi.006","n":"IZZAT IBRAHIM AL-DURI","a":[]},{"id":"LYi.027","n":"Ibrahim Saeed Salim Jadhran","a":["Ibrahim Saeed Salem Awad Aissa Hamed Dawoud Al Jadhran"]},{"id":"QDi.237","n":"JABER ABDALLAH JABER AHMAD AL-JALAHMAH","a":["a) Jaber Al- Jalamah","Abu Muhammad Al-Jalahmah","Jabir Abdallah Jabir Ahmad Jalahmah","Jabir 'Abdallah Jabir Ahmad Al- Jalamah","Jabir Al-Jalhami"]},{"id":"IRi.024","n":"JAFAR MOHAMMADI","a":[]},{"id":"TAi.040","n":"JALALUDDIN HAQQANI","a":["a) Jalaluddin Haqani","Jallalouddin Haqqani","Jallalouddine Haqani"]},{"id":"IQi.022","n":"JAMAL MUSTAFA ABDALLAH SULTAN AL-TIKRITI","a":["na Low quality a.k.a.: na"]},{"id":"QDi.428","n":"JAMAL HUSSEIN HASSAN ZEINIYE","a":["Jamal Husayn Zayniyah"]},{"id":"CDi.025","n":"JAMES NYAKUNI","a":[]},{"id":"SSi.003","n":"JAMES KOANG CHUOL","a":["a) James Koang Chol Ranley","James Koang Chol","Koang Chuol Ranley","James Koang Chual"]},{"id":"CDi.015","n":"JAMIL MUKULU","a":[]},{"id":"TAi.119","n":"JAN MOHAMMAD MADANI IKRAM","a":[]},{"id":"TAi.091","n":"JANAN AGHA","a":["Abdullah Jan Agha"]},{"id":"KPi.016","n":"JANG BOM SU","a":[]},{"id":"KPi.017","n":"JANG YONG SON","a":[]},{"id":"KPi.056","n":"JANG SONG CHOL","a":[]},{"id":"KPi.057","n":"JANG SUNG NAM","a":[]},{"id":"IRi.031","n":"JAVAD RAHIQI","a":["Javad Rahigi; Jawad Rahigi; Jawad Rahiqi"]},{"id":"IQi.068","n":"JAWHAR MAJID AL-DURI","a":["na Low quality a.k.a.: na"]},{"id":"CDi.028","n":"JEAN-MARIE LUGERERO RUNIGA","a":["Jean-Marie Rugerero"]},{"id":"SDi.004","n":"JIBRIL ABDULKARIM IBRAHIM MAYU","a":[]},{"id":"HTi.001","n":"JIMMY CHERIZIER","a":[]},{"id":"KPi.034","n":"JO YONG CHOL","a":["Cho Yong Chol"]},{"id":"KPi.058","n":"JO CHOL SONG","a":["Cho Ch’o’l-so’ng"]},{"id":"KPi.043","n":"JO YONG-WON","a":["Cho Yongwon"]},{"id":"HTi.002","n":"JOHNSON ANDRE","a":[]},{"id":"KPi.018","n":"JON MYONG GUK","a":[]},{"id":"CFi.009","n":"JOSEPH KONY","a":[]},{"id":"CDi.018","n":"JULES MUTEBUTSI","a":[]},{"id":"CDi.005","n":"JÉRÔME KAKWAVU BUKANDE","a":["Jérôme Kakwavu"]},{"id":"GBi.010","n":"JÚLIO NHATE","a":[]},{"id":"QDi.140","n":"KAMAL BEN MAOELDI BEN HASSAN AL-HAMRAOUI","a":["a) Hamroui Kamel ben Mouldi","Hamraoui Kamel born 21 Nov. 1977 in Morocco","Hamraoui Kamel born 21 Nov. 1977 in Tunisia","Hamraoui Kamel born 21 Oct. 1977 in Tunisia"]},{"id":"QDi.167","n":"KAMEL DJERMANE","a":["a) Bilal","Adel","Fodhil","Abou Abdeljalil"]},{"id":"KPi.019","n":"KANG MUN KIL","a":["a) Jiang Wen-ji","Jian Wenji Low quality a.k.a.: na"]},{"id":"KPi.059","n":"KANG CHOL SU","a":[]},{"id":"KPi.020","n":"KANG RYONG","a":[]},{"id":"HTi.009","n":"KEMPES SANON","a":[]},{"id":"QDi.341","n":"KEVIN JORDAN AXEL GUIAVARCH","a":[]},{"id":"TAi.163","n":"KHAIRULLAH BARAKZAI KHUDAI NAZAR","a":["a) Haji Khairullah","Haji Khair Ullah","Haji Kheirullah","Haji Karimullah","Haji Khair Mohammad"]},{"id":"TAi.093","n":"KHAIRULLAH KHAIRKHWAH","a":["a) Mullah Khairullah Khairkhwah","Khirullah Said Wali Khairkhwa, born in Kandahar on 01 Jan.1967","KHIRULLAH KHAIRKHWA file:///C:/Users/rog/Downloads/consolidatedLegacyByNAME (1).html 61/157 3/16/26, 9:07 AM consolidatedLegacyByNAME (1).html (name original script: هاﻮﺧﺮﯿﺧ ﷲﺮﯿﺧ)"]},{"id":"QDi.059","n":"KHALID ABD AL-RAHMAN HAMD AL-FAWAZ","a":["a) Khaled Al-Fauwaz","Khaled A. Al-Fauwaz","Khalid Al-Fawwaz","Khalik Al Fawwaz","Khaled Al-Fawwaz","Khaled Al Fawwaz","Khalid Abdulrahman H. Al Fawaz","ABU-KHALIL"]},{"id":"TAi.150","n":"KHALIL AHMED HAQQANI","a":["a) Khalil Al-Rahman Haqqani","Khalil ur Rahman Haqqani","Khaleel Haqqani"]},{"id":"LYi.011","n":"KHAMIS MUAMMAR QADHAFI","a":[]},{"id":"IQi.054","n":"KHAMIS SIRHAN AL-MUHAMMAD","a":["Dr. Fnu Mnu Khamis"]},{"id":"CDi.009","n":"KHAWA PANGA MANDRO","a":["a) Kawa Panga","Kawa Panga Mandro","Kawa Mandro","Yves Andoul Karim","Mandro Panga Kahwa","Yves Khawa Panga Mandro"]},{"id":"IQi.066","n":"KHAWLA BARZAN IBRAHIM HASAN AL-TIKRITI","a":[]},{"id":"KPi.009","n":"KIM KWANG-IL","a":[]},{"id":"KPi.023","n":"KIM TONG MY’ONG","a":[]},{"id":"KPi.021","n":"KIM JUNG JONG","a":["Kim Chung Chong"]},{"id":"KPi.022","n":"KIM KYU","a":[]},{"id":"KPi.024","n":"KIM YONG CHOL","a":["a) Kim Yong-Chol","Kim Young-Chol","Kim Young-Cheol","Young-Chul"]},{"id":"KPi.030","n":"KIM SONG CHOL","a":["Kim Hak Song Low quality a.k.a.: na"]},{"id":"KPi.035","n":"KIM CHOL SAM","a":[]},{"id":"KPi.032","n":"KIM SE GON","a":[]},{"id":"KPi.044","n":"KIM CHOL NAM","a":[]},{"id":"KPi.045","n":"KIM KYONG OK","a":[]},{"id":"KPi.046","n":"KIM TONG-HO","a":[]},{"id":"KPi.060","n":"KIM MUN CHOL","a":[]},{"id":"KPi.061","n":"KIM NAM UNG","a":["na Low quality a.k.a.: na"]},{"id":"KPi.066","n":"KIM JONG SIK","a":[]},{"id":"KPi.067","n":"KIM KYONG IL","a":["Kim Kyo'ng-il"]},{"id":"KPi.068","n":"KIM TONG CHOL","a":[]},{"id":"KPi.036","n":"KIM SOK CHOL","a":[]},{"id":"KPi.011","n":"KO CH'O'L-CHAE","a":[]},{"id":"KPi.025","n":"KO TAE HUN","a":["Kim Myong Gi"]},{"id":"KPi.069","n":"KO CHOL MAN","a":["Ko Ch'o'l-man"]},{"id":"KPi.070","n":"KU JA HYONG","a":["Ku Cha-hyo'ng"]},{"id":"CDi.022","n":"LAURENT NKUNDA","a":["a) Nkunda Mihigo Laurent","Laurent Nkunda Bwatare","Laurent Nkundabatware","Laurent Nkunda Mahoro Batware","Laurent Nkunda Batware"]},{"id":"CDi.013","n":"LEODOMIR MUGARAGU","a":["a) Manzi Leon","Leo Manzi"]},{"id":"CDi.014","n":"LEOPOLD MUJYAMBERE","a":[]},{"id":"CDi.034","n":"LUCIEN NZAMBAMWITA","a":["André Kalume"]},{"id":"HTi.007","n":"LUCKSON ELAN","a":["na Low quality a.k.a.: na"]},{"id":"IRi.034","n":"M. JAVAD KARIMI SABET","a":["Mohammed Sabet; Mohammad Sabet","M. Javad Kareemi Sabet; M. Jawad Kareemi Sabet; M. Jawad Karimi Sabet"]},{"id":"SOi.013","n":"MAALIM SALMAN","a":["a) Mu’alim Salman","Mualem Suleiman","Ameer Salman","Ma’alim Suleiman","Maalim Salman Ali","Maalim Selman Ali","Ma’alim Selman","Ma’alin Sulayman"]},{"id":"SOi.019","n":"MAALIM AYMAN","a":["a) Ma’alim Ayman","Mo’alim Ayman","Nuh Ibrahim Abdi","Ayman Kabo","Abdiaziz Dubow Ali"]},{"id":"QDi.363","n":"MAGHOMED MAGHOMEDZAKIROVICH ABDURAKHMANOV","a":[]},{"id":"SOi.020","n":"MAHAD KARATE","a":["a) Mahad Mohamed Ali Karate","Mahad Warsame Qalley Karate","Abdirahim Mohamed Warsame Low quality a.k.a.: na"]},{"id":"QDi.015","n":"MAHFOUZ OULD AL-WALID","a":["a) Abu Hafs the Mauritanian","Khalid Al-Shanqiti","Mafouz Walad Al-Walid"]},{"id":"QDi.055","n":"MAHMOOD SULTAN BASHIR-UD-DIN","a":["a) Mahmood, Sultan Bashiruddin","Mehmood, Dr. Bashir Uddin","Mekmud, Sultan Baishiruddin"]},{"id":"QDi.266","n":"MAHMOUD MOHAMMAD AHMED BAHAZIQ","a":["a) Bahaziq Mahmoud","Abu Abd al-‘Aziz","Abu Abdul Aziz","Shaykh Sahib"]},{"id":"QDi.054","n":"MAJEED ABDUL CHAUDHRY","a":["a) Majeed, Abdul","Majeed Chaudhry Abdul","Majid, Abdul"]},{"id":"SSi.007","n":"MALEK REUBEN RIAK RENGU","a":["Malek Ruben"]},{"id":"TAi.154","n":"MALIK NOORZAI","a":["a) ىزرﻮﻧ ﻚﻟﺎﻣ ﻰﺟﺎﺣ (Hajji Malik Noorzai; Hajji Malak Noorzai; Haji Malek Noorzai)","Allah Muhammad"]},{"id":"GBi.011","n":"MAMADU TURE","a":[]},{"id":"YEi.010","n":"MANSUR AL-SA’ADI","a":[]},{"id":"SSi.005","n":"MARIAL CHANUONG YOL MANGOK","a":["a) Marial Chinuong","Marial Chan","Marial Chanoung Yol","Marial Chinoum"]},{"id":"CFi.013","n":"MARTIN KOUMTAMADJI","a":["a) Abdoulaye Miskine","Abdoullaye Miskine","Martin Nadingar Koumtamadji","Martin Nkoumtamadji","Martin Koumta Madji","Omar Mahamat"]},{"id":"CDi.020","n":"MATHIEU, CHUI NGUDJOLO","a":[]},{"id":"QDi.296","n":"MATI UR-REHMAN ALI MUHAMMAD","a":["a) Mati-ur Rehman","Mati ur Rehman","Matiur file:///C:/Users/rog/Downloads/consolidatedLegacyByNAME (1).html 68/157 3/16/26, 9:07 AM consolidatedLegacyByNAME (1).html Rahman","Matiur Rehman","Matti al-Rehman","Abdul Samad","Samad Sial","Abdul Samad Sial","Ustad Talha","Qari Mushtaq"]},{"id":"TAi.020","n":"MATIULLAH","a":["na Low quality a.k.a.: na"]},{"id":"LYi.008","n":"MATUQ MOHAMMED MATUQ","a":["na Low quality a.k.a.: na"]},{"id":"QDi.352","n":"MAULANA FAZLULLAH","a":["a) Mullah Fazlullah","Fazal Hayat"]},{"id":"QDi.434","n":"MAULAWI RAJAB","a":["Maulawi Rajab Salahudin Low quality a.k.a.: na"]},{"id":"QDi.141","n":"MAXAMED CABDULLAAH CIISE","a":["a) Maxamed Cabdullaahi Ciise","Maxammed Cabdullaahi","Cabdullah Mayamed Ciise"]},{"id":"QDi.378","n":"MAXIME HAUCHARD","a":[]},{"id":"QDi.337","n":"MAYSAR ALI MUSA ABDALLAH AL-JUBURI","a":["a) Muyassir al-Jiburi","Muyassir Harara","Muyassir al-Shammari","Muhammad Khalid Hassan"]},{"id":"QDi.072","n":"MEHDI BEN MOHAMED BEN MOHAMED KAMMOUN","a":[]},{"id":"IRi.020","n":"MEHRDADA AKHLAGHI KETABACHI","a":[]},{"id":"QDi.092","n":"MEHREZ BEN MAHMOUD BEN SASSI AL-AMDOUNI","a":["a) Fabio Fusco born 25 May 1968 in Naples, Italy","Fabio Fusco born 18 Dec. 1968 in Tunisia","Fabio Fusco born 25 May 1968 in Algeria","Mohamed Hassan","Meherez Hamdouni","Amdouni Mehrez ben Tah born 14 Jul. 1969 in Tunisia","Meherez ben Ahdoud ben Amdouni"]},{"id":"QDi.223","n":"MERAI ABDEFATTAH KHALIL ZOGHBI","a":[]},{"id":"CDi.041","n":"MICHEL RUKUNDA","a":[]},{"id":"KPi.047","n":"MIN BYONG CHOL","a":["a) Min Pyo’ng-ch’o’l","Min Byong-chol","Min Byong Chun"]},{"id":"IQi.023","n":"MIZBAN KHADR HADI","a":["na Low quality a.k.a.: na"]},{"id":"QDi.304","n":"MOCHAMMAD ACHWAN","a":["a) Muhammad Achwan","Muhammad Akhwan","Mochtar Achwan","Mochtar Akhwan","Mochtar Akwan Low quality a.k.a.: na"]},{"id":"QDi.086","n":"MOHAMAD IQBAL ABDURRAHMAN","a":["a) Rahman, Mohamad Iqbal","A Rahman, Mohamad Iqbal","Abu Jibril Abdurrahman","Fikiruddin Muqti","Fihiruddin Muqti","Abdul Rahman, Mohamad Iqbal"]},{"id":"QDi.417","n":"MOHAMAD RAFI BIN UDIN","a":["na Low quality a.k.a.:","Mohd Radi Bin Udin","Abu Awn al Malizi","Muhammad Ratin","Muhammad Rafiuddin","Abu Una al file:///C:/Users/rog/Downloads/consolidatedLegacyByNAME (1).html 71/157 3/16/26, 9:07 AM consolidatedLegacyByNAME (1).html Malayzie","Mhammad Rahim Bin Udin","Abu Ayn Tok Cit","Muhammad Ratin Bin Nurdin"]},{"id":"QDi.319","n":"MOHAMED LAHBOUS","a":["a) Mohamed Ennouini","Hassan","Hocine"]},{"id":"QDi.147","n":"MOHAMED AMIN MOSTAFA","a":[]},{"id":"CDi.042","n":"MOHAMED ALI NKALUBO","a":[]},{"id":"QDi.060","n":"MOHAMED BEN BELGACEM BEN ABDALLAH AL-AOUADI","a":["a) Mohamed Ben Belkacem Aouadi","Fathi Hannachi"]},{"id":"QDi.062","n":"MOHAMED LAKHAL","a":["a) Lased Ben Heni born 5 Feb. 1969 in Tripoli, Libya","Al-As'ad Ben Hani born 5 Feb. 1969 in Tripoli, Libya","Mohamed Ben Belgacem Awani","Mohamed Aouani born 5 Feb. 1970 in Tunis, Tunisia (formerly listed as)"]},{"id":"QDi.279","n":"MOHAMED BELKALEM","a":["na Low quality a.k.a.:","Abdelali Abou Dher (رذ ﻮﺑا ﻲﻟﺎﻌﻟا ﺪﺒﻋ)","El Harrachi (ﻲﺷاﺮﺤﻟا)"]},{"id":"SOi.024","n":"MOHAMED MOHAMUD MIRE","a":[]},{"id":"SOi.025","n":"MOHAMED OMAR MOHAMED","a":["a) MA’D UMUROW","MOHAMED OMAR HAJI","MOHAMED OMAR MA’ALIN","MOHAMED HAJI OMAR"]},{"id":"IRi.029","n":"MOHAMMAD QANNADI","a":[]},{"id":"IRi.017","n":"MOHAMMAD HEJAZI","a":["Mohammed Hijazi"]},{"id":"IRi.014","n":"MOHAMMAD ESLAMI","a":[]},{"id":"TAi.031","n":"MOHAMMAD AHMADI","a":["na Low quality a.k.a.: na"]},{"id":"TAi.073","n":"MOHAMMAD MOSLIM HAQQANI MUHAMMADI GUL","a":["Moslim Haqqani"]},{"id":"TAi.126","n":"MOHAMMAD SARWAR SIDDIQMAL MOHAMMAD MASOOD","a":["Mohammad Sarwar Siddiqmal (previously listed as) Low quality a.k.a.: na"]},{"id":"TAi.138","n":"MOHAMMAD ALEEM NOORANI","a":[]},{"id":"TAi.127","n":"MOHAMMAD ZAHID","a":["a) Jan Agha Ahmadzai","Zahid Ahmadzai"]},{"id":"QDi.144","n":"MOHAMMAD TAHIR HAMMID HUSSEIN","a":["Abdelhamid Al Kurdi"]},{"id":"TAi.158","n":"MOHAMMAD AMAN AKHUND","a":["a) Mohammed Aman","Mullah Mohammed Oman","Mullah Mohammad Aman Ustad Noorzai"]},{"id":"IQi.062","n":"MOHAMMAD BARZAN IBRAHIM HASAN AL-TIKRITI","a":[]},{"id":"QDi.429","n":"MOHAMMAD ALI AL HABBO","a":["a) Mohamad Abdulkarim","Muhammad Abd-al-Karim"]},{"id":"QDi.020","n":"MOHAMMAD HAMDI MOHAMMAD SADIQ AL-AHDAL","a":["a) Al-Hamati, Muhammad","Muhammad Muhammad Abdullah Al-Ahdal","Mohamed Mohamed Abdullah Al-Ahdal Low quality a.k.a.:","Abu Asim Al-Makki","Ahmed"]},{"id":"TAi.002","n":"MOHAMMAD HASSAN AKHUND","a":[]},{"id":"TAi.066","n":"MOHAMMAD ABBAS AKHUND","a":[]},{"id":"TAi.063","n":"MOHAMMAD AZAM ELMI","a":["Muhammad Azami"]},{"id":"IRi.043","n":"MOHAMMAD BAQER ZOLQADR","a":["Mohammad Bakr Zolqadr; Mohammad Bakr Zolkadr; Mohammad Baqer Zolqadir; Mohammad Baqer Zolqader"]},{"id":"TAi.101","n":"MOHAMMAD ESHAQ AKHUNZADA","a":["Mohammad Ishaq Akhund born in 1963"]},{"id":"TAi.060","n":"MOHAMMAD ESSA AKHUND","a":["MOHAMMAD EISA SANI"]},{"id":"IRi.007","n":"MOHAMMAD FEDAI ASHIANI","a":[]},{"id":"TAi.096","n":"MOHAMMAD HASAN RAHMANI","a":["Gud Mullah Mohammad Hassan"]},{"id":"TAi.042","n":"MOHAMMAD IBRAHIM OMARI","a":["Ibrahim Haqqani"]},{"id":"TAi.039","n":"MOHAMMAD JAWAD WAZIRI","a":[]},{"id":"IRi.027","n":"MOHAMMAD MEHDI NEJAD NOURI","a":[]},{"id":"TAi.013","n":"MOHAMMAD NAIM BARICH KHUDAIDAD","a":["a) Mullah Naeem Barech","Mullah Naeem Baraich","Mullah Naimullah","Mullah Naim Bareh","Mohammad Naim (previously listed as)","Mullah Naim Barich","Mullah Naim Barech","Mullah Naim Barech Akhund","Mullah Naeem Baric","Naim Berich","Haji Gul Mohammed Naim Barich","Gul Mohammad","Haji Ghul Mohammad","Gul Mohammad Kamran","Mawlawi Gul Mohammad Low quality a.k.a.: Spen Zrae"]},{"id":"TAi.104","n":"MOHAMMAD RASUL AYYUB","a":[]},{"id":"IRi.042","n":"MOHAMMAD REZA ZAHEDI","a":["Mohammad Reza Zahidi; Mohammad Raza Zahedi"]},{"id":"IRi.026","n":"MOHAMMAD REZA NAQDI","a":["na Low quality a.k.a.: na"]},{"id":"TAi.136","n":"MOHAMMAD SADIQ AMIR MOHAMMAD","a":[]},{"id":"TAi.079","n":"MOHAMMAD SALIM HAQQANI","a":[]},{"id":"TAi.099","n":"MOHAMMAD SHAFIQ MOHAMMADI","a":[]},{"id":"TAi.106","n":"MOHAMMAD SHAFIQULLAH AHMADI FATIH KHAN","a":["a) Mohammad Shafiq Ahmadi (previously listed as)","Mullah Shafiqullah"]},{"id":"TAi.078","n":"MOHAMMAD WALI MOHAMMAD EWAZ","a":["Mohammad Wali (previously listed as)"]},{"id":"TAi.052","n":"MOHAMMAD YAQOUB","a":[]},{"id":"TAi.068","n":"MOHAMMADULLAH MATI","a":["Mawlawi Nanai"]},{"id":"TAi.004","n":"MOHAMMED OMAR GHULAM NABI","a":[]},{"id":"QDi.001","n":"MOHAMMED SALAHALDIN ABD EL HALIM ZIDANE","a":[]},{"id":"QDi.056","n":"MOHAMMED TUFAIL","a":["a) Tufail, S.M.","Tuffail, Sheik Mohammed"]},{"id":"QDi.228","n":"MOHAMMED AL GHABRA","a":["a) Mohammed El’ Ghabra","Danial Adam"]},{"id":"QDi.272","n":"MOHAMMED YAHYA MUJAHID","a":["Mohammad Yahya Aziz"]},{"id":"LYi.012","n":"MOHAMMED MUAMMAR QADHAFI","a":["Muhammed Muammar Muhammed Abdul Salam"]},{"id":"QDi.387","n":"MOHAMMED ABDEL-HALIM HEMAIDA SALEH","a":["a) Muhammad Hameida Saleh","Muhammad Abd-al-Halim Humaydah","Faris Baluchistan"]},{"id":"QDi.422","n":"MOHAMMED MASOOD AZHAR ALVI","a":[]},{"id":"QDi.416","n":"MOHAMMED YUSIP KARIM","a":[]},{"id":"TAi.165","n":"MOHAMMED QASIM MIR WALI KHUDAI RAHIM","a":["a) Muhammad Qasim","Abdul Salam"]},{"id":"IRi.018","n":"MOHSEN HOJATI","a":[]},{"id":"IRi.016","n":"MOHSEN FAKHRIZADEH-MAHABADI","a":[]},{"id":"QDi.136","n":"MOKHTAR BELMOKHTAR","a":["a) Abou Abbes Khaled","Belaouar Khaled Abou El Abass","Belaouer Khaled Abou El Abass","Belmokhtar Khaled Abou El Abes","Khaled Abou El Abass","Khaled Abou El Abbes","Khaled Abou El Abes","Khaled Abulabbas Na Oor","Mukhtar Belmukhtar"]},{"id":"QDi.300","n":"MONIR CHOUKA","a":[]},{"id":"QDi.383","n":"MORAD LAABOUDI","a":[]},{"id":"IRi.035","n":"MORTEZA SAFARI","a":["Mortaza Safari; Morteza Saferi; Murtaza Saferi; Murtaza Safari"]},{"id":"IRi.033","n":"MORTEZA REZAIE","a":[]},{"id":"IRi.011","n":"MORTEZA BEHZAD","a":[]},{"id":"QDi.067","n":"MOSTAFA KAMEL MOSTAFA IBRAHIM","a":["a) Mustafa Kamel Mustafa","Adam Ramsey Eaman","Kamel Mustapha Mustapha","Mustapha Kamel Mustapha","Mostafa Kamel Mostafa"]},{"id":"YEi.011","n":"MOTLAQ AMER AL-MARRANI","a":["a) Mutlaq Ali Aamer Al Marrani","Abu Emad"]},{"id":"QDi.082","n":"MOUNIR EL MOTASSADEQ","a":["Mounir el Moutassadeq"]},{"id":"QDi.386","n":"MOUNIR BEN DHAOU BEN BRAHIM BEN HELAL","a":["na Low quality a.k.a.:","Mounir Helel","Mounir Hilel","Abu Rahmah","Abu Maryam al-Tunisi"]},{"id":"QDi.096","n":"MOUSSA BEN OMAR BEN ALI ESSAADI","a":[]},{"id":"LYi.013","n":"MUAMMAR MOHAMMED ABU MINYAR QADHAFI","a":[]},{"id":"QDi.238","n":"MUBARAK MUSHAKHAS SANAD MUBARAK AL-BATHALI","a":["a) Mubarak Mishkhis Sanad Al- Bathali","Mubarak Mishkhis Sanad Al-Badhali","Mubarak Al-Bathali","Mubarak Mishkhas Sanad Al-Bathali","Mubarak Mishkhas Sanad Al-Bazali","Mobarak Meshkhas Sanad Al-Bthaly"]},{"id":"TAi.005","n":"MUHAMMAD TAHER ANWARI","a":[]},{"id":"QDi.295","n":"MUHAMMAD JIBRIL ABDUL RAHMAN","a":["a) Mohammad Jibril Abdurrahman","Muhammad Jibriel Abdul Rahman","Mohammad Jibriel Abdurrahman","Muhamad Ricky Ardhan born 8 Aug. 1980 (appears in false Indonesian passport number S335026)","Muhammad Ricky Ardhan bin Muhammad Iqbal","Muhammad Ricky Ardhan bin Abu Jibril"]},{"id":"QDi.318","n":"MUHAMMAD JAMAL ABD-AL RAHIM AHMAD AL-KASHIF","a":["a) Muhammad Jamal Abdo Al-Kashif","Muhammad Jamal Abdo Al Kashef","Muhammad Jamal Abd-Al Rahim Ahmad Al-Kashif","Muhammad Jamal Abd-Al Rahim Al-Kashif","Muhammad Jamal Abdu","Muhammad Jamal Low quality a.k.a.:","Muhammad Jamal Abu Ahmad (nom de guerre)","Abu Ahmad (nom de guerre)","Abu Jamal (nom de guerre)","Muhammad Gamal Abu Ahmed","Mohammad Jamal Abdo Ahmed (nom de guerre)","Muhammad Jamal Abduh (nom de guerre)","Muhammad Jamal Ahmad Abdu (nom de guerre)","Riyadh (nom de guerre)"]},{"id":"IQi.009","n":"MUHAMMAD HAMZA ZUBAIDI","a":[]},{"id":"IQi.080","n":"MUHAMMAD YUNIS AHMAD","a":["a) Muhammad Yunis Al- Ahmed","Muhammad Yunis Ahmed","Muhammad Yunis Ahmad Al-Badrani","Muhammad Yunis Ahmed Al- Moali"]},{"id":"TAi.171","n":"MUHAMMAD OMAR ZADRAN","a":["Mohammad-Omar Jadran"]},{"id":"QDi.395","n":"MUHAMMAD SHOLEH IBRAHIM","a":["a) Mohammad Sholeh Ibrahim","Muhammad Sholeh Ibrohim","Muhammad Soleh Ibrahim","Sholeh Ibrahim","Muh Sholeh Ibrahim"]},{"id":"QDi.404","n":"MUHAMMAD BAHRUM NAIM ANGGIH TAMTOMO","a":["a) Bahrun Naim","Anggih Tamtomo"]},{"id":"YEi.008","n":"MUHAMMAD ABD AL-KARIM AL-GHAMARI","a":[]},{"id":"QDi.418","n":"MUHAMMED REZA LAHAMAN KIRAM","a":[]},{"id":"QDi.377","n":"MUHANNAD AL-NAJDI","a":["Ali Manahi 'Ali al-Mahaydali al-'Utaybi"]},{"id":"CDi.032","n":"MUHINDO AKILI MUNDOS","a":["a) Charles Muhindo Akili Mundos","Akili Muhindo","Muhindo Mundos"]},{"id":"IQi.048","n":"MUHSIN KHADR AL-KHAFAJI","a":[]},{"id":"QDi.184","n":"MUHSIN FADHIL AYED ASHOUR AL-FADHLI","a":["a) Muhsin Fadhil ‘Ayyid al Fadhli","Muhsin Fadil Ayid Ashur al Fadhli","Abu Majid Samiyah","Abu Samia"]},{"id":"KPi.012","n":"MUN CHO'NG-CH'O'L","a":["Mun Chong-Chol"]},{"id":"KPi.071","n":"MUN KYONG HWAN","a":["Mun Kyo'ng-hwan"]},{"id":"SDi.002","n":"MUSA HILAL ABDALLA ALNSIEM","a":[]},{"id":"QDi.306","n":"MUSTAFA HAJJI MUHAMMAD KHAN","a":["a) لﻮﻏ ﻦﺴﺣ (Hassan Ghul; Hassan Gul; Hasan Gul)","Khalid Mahmud"]},{"id":"LYi.014","n":"MUTASSIM QADHAFI","a":[]},{"id":"QDi.278","n":"MUTHANNA HARITH SALMAN AL-DARI","a":["a) Dr. Muthanna Al Dari","Muthana Harith Al Dari","Muthanna Harith Sulayman Al-Dari","Muthanna Harith Sulayman Al-Dhari","Muthanna Hareth Al-Dhari","Muthana Haris Al-Dhari","Doctor Muthanna Harith Sulayman Al Dari Al-Zawba","Muthanna Harith Sulayman Al-Dari Al-Zobai","Muthanna Harith Sulayman Al-Dari al-Zawba'i","Muthanna Hareth al-Dari","Muthana Haris al-Dari","Doctor Muthanna al-Dari","Dr. Muthanna Harith al-Dari al-Zowbai"]},{"id":"IQi.012","n":"MUZAHIM SA'B HASSAN AL-TIKRITI","a":[]},{"id":"QDi.369","n":"MU’TASSIM YAHYA ‘ALI AL-RUMAYSH","a":["na Low quality a.k.a.:","Rayhanah","Abu-Rayhanah","Handalah","Abu-Rayhanah al-'Ansari al-Jeddawi"]},{"id":"QDi.413","n":"MYRNA AJIJUL MABANZA","a":["a) Myrna Adijul Mabanza","Myrna Ajilul Mabanza"]},{"id":"QDi.405","n":"Malik Ruslanovich Barkhanoev","a":[]},{"id":"LYi.025","n":"Mohammed Al Amin Al-Arabi Kashlaf","a":["a) Kashlaf","Koshlaf","al-Qasab Low quality a.k.a.: Keslaf"]},{"id":"QDi.406","n":"Murad Iraklievich Margoshvili","a":[]},{"id":"LYi.024","n":"Mus’ab Mustafa Abu al Qassim Omar","a":[]},{"id":"TAi.132","n":"NAJIBULLAH MUHAMMAD JUMA","a":[]},{"id":"TAi.071","n":"NAJIBULLAH HAQQANI HIDAYATULLAH","a":["a) Najibullah Haqani","NAJEEBULLAH HAYAT"]},{"id":"QDi.226","n":"NAJMUDDIN FARAJ AHMAD","a":["a) Mullah Krekar","Fateh Najm Eddine Farraj","Faraj Ahmad Najmuddin"]},{"id":"IRi.022","n":"NASER MALEKI","a":[]},{"id":"QDi.012","n":"NASHWAN ABD AL-RAZZAQ ABD AL-BAQI","a":["a) Abdal Al-Hadi Al-Iraqi","Abd Al- Hadi Al-Iraqi","Omar Uthman Mohammed","Abdul Hadi Arif Ali"]},{"id":"TAi.146","n":"NASIRUDDIN HAQQANI","a":["a) Dr. Alim Ghair","Naseer Haqqani","Dr. Naseer Haqqani","Nassir Haqqani","Nashir Haqqani"]},{"id":"QDi.358","n":"NASSER AHMED MUTHANA","a":["Nasir Muthana"]},{"id":"IQi.045","n":"NAYIF SHINDAKH THAMIR GHALIB","a":[]},{"id":"TAi.100","n":"NAZIR MOHAMMAD ABDUL BASIR","a":["Nazar Mohammad (previously listed as)"]},{"id":"TAi.129","n":"NAZIRULLAH HANAFI WALIULLAH","a":["Nazirullah Aanafi Waliullah Low quality a.k.a.: na"]},{"id":"QDi.222","n":"NESSIM BEN ROMDHANE SAHRAOUI","a":["a) Dass","Nasim al- Sahrawi"]},{"id":"IQi.070","n":"NIDAL AL-RABI'I","a":["na Low quality a.k.a.: na"]},{"id":"TAi.019","n":"NIK MOHAMMAD DOST MOHAMMAD","a":["Nik Mohammad (previously listed as)"]},{"id":"IQi.065","n":"NOOR BARZAN IBRAHIM HASAN AL-TIKRITI","a":[]},{"id":"QDi.427","n":"NOOR WALI MEHSUD","a":["Abu Mansoor Asim"]},{"id":"TAi.110","n":"NOOR MOHAMMAD SAQIB","a":["NOOR MOHAMMED SAQEB (name in original script: ﺐﻗﺎﺛ ﺪﻤﺤﻣ رﻮﻧ)"]},{"id":"TAi.058","n":"NOORUDDIN TURABI MUHAMMAD QASIM","a":["a) Noor ud Din Turabi","MULLAH NOORDIN TORABI"]},{"id":"QDi.149","n":"NOUREDDINE BEN ALI BEN BELKASSEM AL-DRISSI","a":["Drissi Noureddine Low quality a.k.a.:","Abou Ali","Faycal"]},{"id":"CFi.002","n":"NOURREDINE ADAM","a":["a) Nureldine Adam","Nourreldine Adam","Nourreddine Adam","Mahamat Nouradine Adam","Mohamed Adam Brema Abdallah"]},{"id":"CDi.029","n":"NTABO NTABERI SHEKA","a":["na Low quality a.k.a.: na"]},{"id":"QDi.087","n":"NURJAMAN RIDUAN ISAMUDDIN","a":["a) Hambali","Nurjaman","Isomuddin, Nurjaman Riduan","Hambali Bin Ending","Encep Nurjaman (birth name)","Hambali Ending Hambali","Isamuddin Riduan","Isamudin Ridwan"]},{"id":"TAi.089","n":"NURULLAH NURI","a":["Norullah Noori"]},{"id":"QDi.374","n":"NUSRET IMAMOVIC","a":["Nusret Sulejman Imamovic"]},{"id":"QDi.407","n":"OMAN ROCHMAN","a":["a) Oman Rahman","Abu Sulaiman Aman Abdurrahman Al-Arkhabiliy","Aman Abdul Rahman","Aman Abdurahman","Aman Abdurrachman","Oman Abdulrohman","Oman Abdurrahman","Aman Abdurrahman"]},{"id":"SOi.010","n":"OMAR HAMMAMI","a":["a) Abu Maansuur Al-Amriki","Abu Mansour Al-Amriki","Abu Mansuur Al-Amriki","Umar Hammami","Abu Mansur Al- Amriki"]},{"id":"IQi.082","n":"OMAR SABAWI IBRAHIM HASAN AL-TIKRITI","a":["a) Umar Sabawi Ibrahim Hasan Al-Tikriti","Omar Sab’awi Ibrahim Hasan Al-Tikriti","Omar Sabawi Ibrahim Hassan Al-Tikriti","Umar Ahmad Ali Al- Alusi (DPOB: 1970, Baghdad, Iraq, passport no. 2863795S, expires 23 Aug. 2005 (Iraq))"]},{"id":"QDi.359","n":"OMAR ALI HUSSAIN","a":[]},{"id":"QDi.031","n":"OMAR MAHMOUD UTHMAN","a":["a) Al-Samman Uthman","Umar Uthman","Omar Mohammed Othman Low quality a.k.a.:","Abu Qatada Al-Filistini","Abu Umr Takfiri","Abu Omar Abu Umar","Abu Umar Umar","Abu Ismail"]},{"id":"SDi.006","n":"OSMAN MOHAMED HAMID MOHAMED","a":[]},{"id":"QDi.292","n":"OTHMAN AHMED OTHMAN AL-GHAMDI","a":["a) Othman al- Ghamdi born 27 May 1979 in Saudi Arabia","Uthman al-Ghamdi born 27 May 1979 in Saudi Arabia","Uthman al- Ghamidi born 27 May 1979 in Saudi Arabia","Othman bin Ahmed bin Othman Alghamdi","Othman Ahmed Othman Al Omairah (born in 1973 in Shabwa, Yemen, nationality: Yemeni)","Uthman Ahmad Uthman al-Ghamdi","Othman Ahmed Othman al-Omirah"]},{"id":"CFi.006","n":"OUMAR YOUNOUS ABDOULAY","a":["a) Oumar Younous","Omar Younous","Oumar Sodiam","Oumar Younous M’Betibangui"]},{"id":"QDi.342","n":"OUMAR DIABY","a":[]},{"id":"LYi.029","n":"Osama Al Kuni Ibrahim","a":["a) Osama Milad","Osama al-Milad","Osama Zawiya","Osama Zawiyah","Osama al Kuni"]},{"id":"CDi.024","n":"PACIFIQUE NTAWUNGUKA","a":["Pacifique Ntawungula"]},{"id":"KPi.072","n":"PAE WON UK","a":[]},{"id":"KPi.006","n":"PAEK CHANG-HO","a":["a) Pak Chang-Ho","Paek Ch'ang-Ho"]},{"id":"KPi.048","n":"PAEK SE BONG","a":["Paek Se Pong"]},{"id":"KPi.029","n":"PAK CHUN IL","a":[]},{"id":"KPi.049","n":"PAK HAN SE","a":["Kang Myong Chol"]},{"id":"KPi.073","n":"PAK BONG NAM","a":["a) Lui Wai Ming","Pak Pong Nam","Pak Pong-nam"]},{"id":"KPi.079","n":"PAK MUN IL","a":[]},{"id":"KPi.063","n":"PAK YONG SIK","a":["Pak Yo’ng-sik"]},{"id":"KPi.050","n":"PAK TO CHUN","a":["a) Pak Do Chun","Pak To’-Ch’un Low quality a.k.a.: na"]},{"id":"QDi.122","n":"PARLINDUNGAN SIREGAR","a":["a) Siregar, Parlin","Siregar, Saleh Parlindungan"]},{"id":"SSi.008","n":"PAUL MALONG AWAN ANEI","a":["a) Paul Malong Awan Anei","Paul Malong","Bol Malong"]},{"id":"SSi.006","n":"PETER GADET","a":["a) Peter Gatdet Yaka","Peter Gadet Yak","Peter Gadet Yaak","Peter Gatdet Yaak","Peter Gatdet","Peter Gatdeet Yaka"]},{"id":"QDi.376","n":"PETER CHERIF","a":["na Low quality a.k.a.: na"]},{"id":"QDi.245","n":"PIO ABOGNE DE VERA","a":[]},{"id":"HTi.006","n":"PROPHANE VICTOR","a":[]},{"id":"CDi.037","n":"PROTOGÈNE RUVUGAYIMIKORE","a":["a) RUHINDA","GABY RUHINDA","ZORRO MIDENDE"]},{"id":"KPi.062","n":"Pak Il Kyu","a":["Pak Il-Gyu"]},{"id":"TAi.168","n":"QARI SAIFULLAH TOKHI","a":["a) Qari Saifullah","Qari Saifullah Al Tokhi","Saifullah Tokhi Low quality a.k.a.: Qari Sahab"]},{"id":"IRi.039","n":"QASEM SOLEIMANI","a":["Qasim Soleimani; Qasem Sulaimani; Qasim Sulaimani; Qasim Sulaymani; Qasem Sulaymani; Kasim Soleimani; Kasim Sulaimani; Kasim Sulaymani"]},{"id":"QDi.282","n":"QASIM MOHAMED MAHDI AL-RIMI","a":[]},{"id":"TAi.047","n":"QUDRATULLAH JAMAL","a":["Haji Sahib"]},{"id":"LYi.004","n":"QUREN SALIH QUREN AL QADHAFI","a":["Akrin Saleh Akrin (ﻦﯾﺮﻗأ ﻦﯾﺮﻗأ ﺢﻟﺎﺻ)"]},{"id":"IQi.002","n":"QUSAY SADDAM HUSSEIN AL-TIKRITI","a":[]},{"id":"KPi.008","n":"RA KY'ONG-SU","a":["a) Ra Kyung-Su","Chang Myong Ho","Chang Myo’ng-Ho","Chang Myong-Ho","Ra Kyong-Su Low quality a.k.a.: na"]},{"id":"QDi.142","n":"RADI ABD EL SAMIE ABOU EL YAZID EL AYASHI","a":["na Low quality a.k.a.: Mera’i"]},{"id":"QDi.208","n":"RADULAN SAHIRON","a":["a) Radullan Sahiron","Radulan Sahirun","Radulan Sajirun"]},{"id":"QDi.029","n":"RAED MUHAMMAD HASAN MUHAMMAD HIJAZI","a":["a) Raed M. Hijazi","Ri’ad Muhammad Hasan Muhammad Hijazi (Previously listed as. In Arabic: ﺪﻤﺤﻣ ﻦﺴﺣ ﺪﻤﺤﻣ ضﺎﯾر يزﺎﺠﺤﻟا)"]},{"id":"IQi.015","n":"RAFI ABD-AL-LATIF TILFAH AL-TIKRITI","a":[]},{"id":"IQi.057","n":"RAGHAD SADDAM HUSSEIN AL-TIKRITI","a":[]},{"id":"TAi.137","n":"RAHMATULLAH KAKAZADA","a":["a) Rehmatullah","Kakazada Low quality a.k.a.: Mullah Nasir"]},{"id":"TAi.172","n":"RAHMATULLAH SHAH NAWAZ","a":["a) Qari Rahmat","Kari Rahmat"]},{"id":"QDi.081","n":"RAMZI MOHAMED ABDULLAH BINALSHIBH","a":["a) Binalsheidah, Ramzi Mohamed Abdullah","Bin Al Shibh, Ramzi","Omar, Ramzi Mohamed Abdellah","Mohamed Ali Abdullah Bawazir","Binalshibh Ramzi Mohammed Abdullah","Ramzi Binalshib","Ramzi Mohamed Abdellah Omar Hassan Alassiri","Binalshibh Ramsi Mohamed Abdullah","Abu Ubaydah","Umar Muhammad 'Abdallah Ba' Amar"]},{"id":"IQi.058","n":"RANA SADDAM HUSSEIN AL-TIKRITI","a":[]},{"id":"QDi.246","n":"REDENDO CAIN DELLOSA","a":["a) Abu Ilonggo","Brandon Berusa","Abu Muadz","Arnulfo Alvarado","Habil Ahmad Dellosa"]},{"id":"QDi.262","n":"REDOUANE EL HABHAB","a":["Abdelrahman"]},{"id":"HTi.003","n":"RENEL DESTINA","a":[]},{"id":"IRi.015","n":"REZA-GHOLI ESMAELI","a":["Reza-Gholi Ismaili"]},{"id":"KPi.004","n":"RI HONG-SOP","a":[]},{"id":"KPi.002","n":"RI JE-SON","a":["Ri Che- son"]},{"id":"KPi.033","n":"RI WON HO","a":[]},{"id":"KPi.052","n":"RI SU YONG","a":[]},{"id":"KPi.074","n":"RI CHUN HWAN","a":["Ri Ch'un-hwan"]},{"id":"KPi.075","n":"RI CHUN SONG","a":["Ri Ch'un-so'ng"]},{"id":"KPi.077","n":"RI SONG HYOK","a":["Li Cheng He"]},{"id":"KPi.078","n":"RI U’N SO’NG","a":["a) Ri Eun Song","Ri Un Song"]},{"id":"KPi.026","n":"RI MAN GON","a":[]},{"id":"KPi.051","n":"RI JAE IL","a":[]},{"id":"KPi.053","n":"RI YONG MU","a":["Ri Yong-Mu"]},{"id":"KPi.076","n":"RI PYONG CHUL","a":["a) Ri Pyo’ng-ch’o’l","Ri Pyong Chol"]},{"id":"QDi.248","n":"RICARDO PEREZ AYERAS","a":["a) Abdul Kareem Ayeras","Abdul Karim Ayeras"]},{"id":"IQi.079","n":"ROODI SLEWA","a":["a) Rudi Slaiwah","Rudi Untaywan Slaywah","Rudi Saliwa"]},{"id":"QDi.247","n":"RUBEN PESTANO LAVILLA, JR","a":["a) Reuben Lavilla","Sheik Omar","Mile D Lavilla","Reymund Lavilla","Ramo Lavilla","Mike de Lavilla","Abdullah Muddaris","Ali Omar","Omar Lavilla","Omar Labella"]},{"id":"IQi.021","n":"RUKAN RAZUKI ABD-AL-GHAFUR SULAIMAN AL-TIKRITI","a":["a) Rukan Abdal-Ghaffur Sulayman al- Majid","Rukan Razuqi Abd al-Ghafur Al-Majid","Rukan Abd al-Ghaffur al-Majid Al-Tikriti Abu Walid Low quality a.k.a.: na"]},{"id":"QDi.398","n":"RUSTAM MAGOMEDOVICH ASELDEROV","a":[]},{"id":"TAi.069","n":"RUSTUM HANAFI HABIBULLAH","a":["Rostam Nuristani"]},{"id":"KPi.027","n":"RYU JIN","a":["na Low quality a.k.a.: na"]},{"id":"IQi.049","n":"Rashid Taan Kathim","a":[]},{"id":"IQi.055","n":"SA'D ABD-AL-MAJID AL-FAISAL AL-TIKRITI","a":[]},{"id":"QDi.382","n":"SA'D BIN SA'D MUHAMMAD SHARIYAN AL-KA'BI","a":["a) Sa'd bin Sa'd Muhammad Shiryan al- Ka'bi","Sa'd Sa'd Muhammad Shiryan al-Ka'bi","Sa'd al-Sharyan al-Ka'bi"]},{"id":"LYi.015","n":"SAADI QADHAFI","a":[]},{"id":"IQi.036","n":"SAB'AWI IBRAHIM HASSAN AL-TIKRITI","a":[]},{"id":"IQi.001","n":"SADDAM HUSSEIN AL-TIKRITI","a":["na Low quality a.k.a.: Abu Ali"]},{"id":"TAi.087","n":"SADUDDIN SAYYED","a":["a) Sadudin Sayed","Sadruddin"]},{"id":"LYi.019","n":"SAFIA FARKASH AL-BARASSI","a":["Safia Farkash Mohammed Al-Hadad, born 1 Jan. 1953 (Oman passport no.03825239, date of issue 4 May 2014, expiry 3 May 2024.)"]},{"id":"QDi.080","n":"SAID BAHAJI","a":["Zouheir Al Maghribi"]},{"id":"QDi.323","n":"SAID ARIF","a":[]},{"id":"TAi.028","n":"SAID AHMED SHAHIDKHEL","a":["na Low quality a.k.a.: na"]},{"id":"QDi.289","n":"SAID JAN ‘ABD AL-SALAM","a":["a) Sa'id Jan 'Abd-al- Salam","Dilawar Khan Zain Khan born 1 Jan. 1972"]},{"id":"TAi.170","n":"SAIDULLAH JAN","a":["Abid Khan"]},{"id":"LYi.016","n":"SAIF AL-ARAB QADHAFI","a":[]},{"id":"LYi.017","n":"SAIF AL-ISLAM QADHAFI","a":[]},{"id":"IQi.014","n":"SAIF-AL-DIN FULAYYIH HASSAN TAHA AL-RAWI","a":["Ayad Futayyih Al-Rawi Low quality a.k.a.: na"]},{"id":"IQi.046","n":"SAIF-AL-DIN AL-MASHHADANI","a":[]},{"id":"QDi.152","n":"SAIFI AMMARI","a":["a) EL PARA (COMBAT NAME)","ABDERREZAK LE PARA (combat name)","ABOU HAIDARA","EL OURASSI","ABDERREZAK ZAIMECHE","ABDUL RASAK AMMANE ABU HAIDRA","ABDALARAK Low quality a.k.a.: na"]},{"id":"IQi.063","n":"SAJA BARZAN IBRAHIM HASAN AL-TIKRITI","a":[]},{"id":"IQi.056","n":"SAJIDA KHAYRALLAH TILFAH","a":[]},{"id":"QDi.251","n":"SALAH EDDINE GASMI","a":[]},{"id":"TAi.149","n":"SALEH MOHAMMAD KAKAR AKHTAR MUHAMMAD","a":["Saleh Mohammad"]},{"id":"YEi.007","n":"SALEH MESFER SALEH AL SHAER","a":[]},{"id":"QDi.231","n":"SALEM NOR ELDIN AMOHAMED AL-DABSKI","a":["a) Abu Al-Ward","Abdullah Ragab"]},{"id":"QDi.388","n":"SALIM BENGHALEM","a":["na Low quality a.k.a.: na"]},{"id":"CFi.011","n":"SALIM KONY","a":["a) Salim Saleh Kony","Salim Saleh","Salim Ogaro","Okolu Salim","Salim Saleh Obol Ogaro","Simon Salim file:///C:/Users/rog/Downloads/consolidatedLegacyByNAME (1).html 106/157 3/16/26, 9:07 AM consolidatedLegacyByNAME (1).html Obol"]},{"id":"QDi.003","n":"SALIM AHMAD SALIM HAMDAN","a":[]},{"id":"QDi.411","n":"SALIM MUSTAFA MUHAMMAD AL-MANSUR","a":["a) Salim Mustafa Muhammad Mansur Al-Ifri","Saleem Al-Ifri","Salim Mansur Mustafa","Salim Mansur","Hajji Salim Al-Shaklar"]},{"id":"QDi.114","n":"SALIM Y SALAMUDDIN JULKIPLI","a":["a) Kipli Sali","Julkipli Salim"]},{"id":"QDi.360","n":"SALLY-ANNE FRANCES JONES","a":[]},{"id":"QDi.064","n":"SAMI BEN KHAMIS BEN SALEH ELSSEID","a":["Omar El Mouhajer"]},{"id":"IQi.060","n":"SAMIRA SHAHBANDAR","a":[]},{"id":"QDi.431","n":"SANAULLAH GHAFARI","a":["a) Dr. Shahab al Muhajir","Shahab Muhajer","Shahab Mohajir","Shahab Mahajar","Shihab al Muhajir","Shihab Muhajer","Shihab Mohajir","Shihab Mahajar"]},{"id":"SSi.004","n":"SANTINO DENG WOL","a":["a) Santino Deng Wuol","Santino Deng Kuol"]},{"id":"TAi.057","n":"SAYED MOHAMMAD AZIM AGHA","a":["a) Sayed Mohammad Azim Agha","Agha Saheb"]},{"id":"TAi.080","n":"SAYED ESMATULLAH ASEM ABDUL QUDDUS","a":["a) Esmatullah Asem","Asmatullah Asem","Sayed Esmatullah Asem (previously listed as)"]},{"id":"TAi.072","n":"SAYYED GHIASSOUDDINE AGHA","a":[]},{"id":"TAi.006","n":"SAYYED MOHAMMED HAQQANI","a":["Sayyed Mohammad Haqqani Low quality a.k.a.: na"]},{"id":"LYi.003","n":"SAYYID MOHAMMED QADHAF AL-DAM","a":["Sayed M. Gaddef Eddam Low quality a.k.a.: na"]},{"id":"IQi.086","n":"SA’D SABAWI IBRAHIM HASAN AL-TIKRITI","a":["a) Sa’ad Sabawi Ibrahim Hasan Al- Tikriti","Sa’d Sab’awi Hasan Al-Tikriti"]},{"id":"QDi.333","n":"SEIFALLAH BEN OMAR BEN MOHAMED BEN HASSINE","a":["a) Seif Allah ben Hocine","Saifallah ben Hassine","Sayf Allah ‘Umar bin Hassayn","Seifallah ben Amor ben Hassine","Sayf Allah bin Hussayn"]},{"id":"CDi.036","n":"SEKA BALUKU","a":[]},{"id":"IRi.037","n":"SEYED JABER SAFDARI","a":["Syed Jaber Safdari"]},{"id":"IRi.019","n":"SEYYED HUSSEIN HOSSEINI","a":["Syed Husain Husaini; Syed Husein Huseini"]},{"id":"QDi.338","n":"SHAFI SULTAN MOHAMMED AL-AJMI","a":["a) Shafi al-Ajmi","Sheikh Shafi al-Ajmi"]},{"id":"TAi.113","n":"SHAHABUDDIN DELAWAR","a":[]},{"id":"QDi.368","n":"SHAMIL MAGOMEDOVICH ISMAILOV","a":["Shamil Magomedovich Aliev (original script: Шамиль Магомедович Алиев)"]},{"id":"TAi.008","n":"SHAMS UR-RAHMAN ABDUL ZAHIR","a":["a) Shamsurrahman","Shams-u- Rahman","Shamsurrahman Abdurahman"]},{"id":"TAi.103","n":"SHAMSUDDIN","a":["Pahlawan Shamsuddin"]},{"id":"QDi.410","n":"SHANE DOMINIC CRAWFORD","a":[]},{"id":"TAi.067","n":"SHER MOHAMMAD ABBAS STANEKZAI PADSHAH KHAN","a":[]},{"id":"SSi.002","n":"SIMON GATWECH DUAL","a":["a) Simon Gatwich Dual","Simon Getwech Dual","Simon Gatwec Duel","Simon Gatweach","Simon Gatwick","Simon Gatwech","Simon Garwich"]},{"id":"TAi.144","n":"SIRAJUDDIN JALLALOUDINE HAQQANI","a":[]},{"id":"QDi.355","n":"SOFIANE BEN GOUMO","a":["Sufyan bin Qumu Low quality a.k.a.: ABOU FARAI AL LIBI"]},{"id":"KPi.031","n":"SON JONG HYOK","a":["Son Min"]},{"id":"KPi.039","n":"SON MUN SAN","a":[]},{"id":"CDi.026","n":"STANISLAS NZEYIMANA","a":["a) Deogratias Bigaruka Izabayo","Izabayo Deo","Jules Mateso Mlamba"]},{"id":"CDi.017","n":"STRATON MUSONI","a":["IO Musoni"]},{"id":"QDi.154","n":"SULAIMAN JASSEM SULAIMAN ALI ABO GHAITH","a":[]},{"id":"IQi.027","n":"SULTAN HASHIM AHMAD AL-TA'I","a":[]},{"id":"YEi.006","n":"SULTAN SALEH AIDA AIDA ZABIN","a":[]},{"id":"QDi.435","n":"SULTAN AZIZ AZAM","a":[]},{"id":"CDi.008","n":"SULTANI MAKENGA","a":[]},{"id":"CDi.012","n":"SYLVESTRE MUDACUMURA","a":["a) Mupenzi Bernard","General Major Mupenzi","General Mudacumura"]},{"id":"LYi.028","n":"Salah Badi","a":["na Low quality a.k.a.: na"]},{"id":"IQi.069","n":"Sundus Abd Al-Ghafur","a":["na Low quality a.k.a.: na"]},{"id":"IQi.020","n":"TAHA YASSIN RAMADAN AL-JIZRAWI","a":["na Low quality a.k.a.: na"]},{"id":"IQi.024","n":"TAHA MUHYI-AL-DIN MA'RUF","a":[]},{"id":"QDi.420","n":"TAHA IBRAHIM ABDALLAH BAKR AL KHUWAYT","a":["a) Hajji Abdelnasser","Hajji Abd al-Nasr","Hajji 'Abd Al-Nasir (formerly listed as)"]},{"id":"IQi.016","n":"TAHIR JALIL HABBUSH AL-TIKRITI","a":[]},{"id":"QDi.370","n":"TARAD MOHAMMAD Alnori Alfares ALJARBA","a":["Tarad Aljarba"]},{"id":"QDi.354","n":"TARAK BEN TAHER BEN FALEH OUNI HARZI","a":[]},{"id":"QDi.074","n":"TAREK BEN HABIB BEN AL-TOUMI AL-MAAROUFI","a":["a) Abu Ismail","Abou Ismail el Jendoubi","Abou Ismail Al Djoundoubi"]},{"id":"QDi.014","n":"TARIQ ANWAR EL SAYED AHMED","a":["a) Hamdi Ahmad Farag","Amr Al-Fatih Fathi","Tarek Anwar El Sayed Ahmad"]},{"id":"IQi.025","n":"TARIQ AZIZ","a":["Tariq Mikhail Aziz in Baghdad, Iraq"]},{"id":"QDi.345","n":"TARKHAN TAYUMURAZOVICH BATIRASHVILI","a":[]},{"id":"QDi.366","n":"TARKHAN ISMAILOVICH GAZIEV","a":["a) Ramzan Oduev (original script: Рамзан Одуев)","Tarkhan Isaevich Gaziev (original script: Тархан Исаевич Газиев)","Husan Isaevich Gaziev (original script: Хусан Исаевич Газиев)","Umar Sulimov (original script: Умар Сулимов)"]},{"id":"QDi.219","n":"TAUFIK RIFKI","a":[]},{"id":"QDi.280","n":"TAYEB NAIL","a":["a) Djaafar Abou Mohamed (ﺪﻤﺤﻣ ﻮﺑا ﺮﻔﻌﺟ)","Abou Mouhadjir (ﺮﺟﺎﮭﻣ ﻮﺑا)","Mohamed Ould Ahmed Ould Ali (born in 1976)"]},{"id":"GBi.007","n":"TCHAM NA MAN","a":[]},{"id":"GBi.006","n":"TCHIPA NA BIDON","a":[]},{"id":"QDi.017","n":"THARWAT SALAH SHIHATA","a":["a) Tarwat Salah Abdallah","Salah Shihata Thirwat","Shahata Thirwat","Tharwat Salah Shihata Ali (previously listed as)"]},{"id":"CDi.007","n":"THOMAS LUBANGA","a":["na Low quality a.k.a.: na"]},{"id":"IQi.067","n":"THORAYA BARZAN IBRAHIM HASAN AL-TIKRITI","a":["na Low quality a.k.a.: na"]},{"id":"SDi.010","n":"TIJANI IBRAHIM MOUSSA MOHAMED","a":["AL ZEIR SALEM"]},{"id":"TAi.174","n":"TOREK AGHA","a":["Sayed Mohammed Hashan"]},{"id":"KPi.080","n":"TSANG YUNG YUAN","a":["a) Neil Tsang","Yun Yuan Tsang Low quality a.k.a.: na"]},{"id":"TAi.022","n":"UBAIDULLAH AKHUND YAR MOHAMMAD AKHUND","a":["a) Obaidullah Akhund","Obaid Ullah Akhund"]},{"id":"IQi.003","n":"UDAY SADDAM HUSSEIN AL-TIKRITI","a":[]},{"id":"IQi.050","n":"UGLA ABID SAKR AL-ZUBAISI","a":["Saqr al-Kabisi Abd Aqala"]},{"id":"QDi.294","n":"UMAR PATEK","a":["a) Omar Patek","Mike Arsalan","Hisyam Bin Zein","Anis Alawi Jafar"]},{"id":"QDi.412","n":"UMAR MAHMUD IRHAYYIM AL-KUBAYSI","a":[]},{"id":"HTi.005","n":"VITELHOMME INNOCENT","a":[]},{"id":"TAi.095","n":"WALIJAN","a":["na Low quality a.k.a.: na"]},{"id":"IQi.037","n":"WATBAN IBRAHIM HASSAN AL-TIKRITI","a":[]},{"id":"QDi.350","n":"WIJI JOKO SANTOSO","a":["Wijijoko Santoso born 14 Jul. 1975 in Rembang, Jawa Tengah, Indonesia"]},{"id":"CDi.043","n":"WILLIAM AMURI YAKUTUMBA","a":["YAKUTUMBA"]},{"id":"CDi.044","n":"WILLY NGOMA","a":[]},{"id":"HTi.004","n":"WILSON JOSEPH","a":["na Low quality a.k.a.: LANMO SAN JOU"]},{"id":"QDi.249","n":"YAHIA DJOUADI","a":[]},{"id":"IQi.044","n":"YAHIA ABDALLAH AL-UBAIDI","a":[]},{"id":"TAi.169","n":"YAHYA HAQQANI","a":["Yaya"]},{"id":"IRi.036","n":"YAHYA RAHIM SAFAVI","a":["Yahya Raheem Safavi"]},{"id":"TAi.015","n":"YAR MOHAMMAD RAHIMI","a":[]},{"id":"IQi.081","n":"YASIR SABAWI IBRAHIM HASAN AL-TIKRITI","a":["a) Yassir Sabawi Ibrahim Hasan Al-Tikriti","Yasser Sabawi Ibrahim Hasan Al-Tikriti","Yasir Sab’awi Ibrahim Hasan Al-Tikriti","Yasir Sabawi Ibrahim Hassan Al-Tikriti","Ali Thafir Abdallah in Baghdad, Iraq (in Baghdad, Iraq (DPOB - 1970) - Passport No. 284158, expires 21 August 2005 (Iraq))"]},{"id":"QDi.123","n":"YASSIN SYAWAL","a":["a) Salim Yasin","Yasin Mahmud Mochtar","Abdul Hadi Yasin","Muhamad Mubarok","Muhammad Syawal","Yassin Sywal (formerly listed as)"]},{"id":"QDi.301","n":"YASSIN CHOUKA","a":[]},{"id":"QDi.124","n":"YAZID SUFAAT","a":[]},{"id":"KPi.010","n":"YO'N CHO'NG NAM","a":[]},{"id":"KPi.028","n":"YU CHOL U","a":[]},{"id":"KPi.001","n":"YUN HO-JIN","a":[]},{"id":"QDi.126","n":"YUNOS UMPARA MOKLIS","a":["a) Muklis Yunos","Mukhlis Yunos (previously listed as)","Saifullah Mukhlis Yunos","Saifulla Moklis Yunos"]},{"id":"YEi.009","n":"YUSUF AL-MADANI","a":[]},{"id":"SOi.001","n":"Yasin Ali Baynah","a":["a) ALI, Yasin Baynah","ALI, Yassin Mohamed","BAYNAH, Yasin","BAYNAH, Yassin","BAYNAX, Yasiin Cali","BEENAH, Yasin","BEENAH, Yassin","BEENAX, Yasin","BEENAX, Yassin","BENAH, Yasin","BENAH, Yassin","BENAX, Yassin","BEYNAH, Yasin","BINAH, Yassin","CALI, Yasiin Baynax"]},{"id":"QDi.308","n":"ZAFAR IQBAL","a":["a) Zaffer Iqbal","Malik Zafar Iqbal Shehbaz","Malik Zafar Iqbal Shahbaz","Malik Zafar Iqbal"]},{"id":"QDi.083","n":"ZAKARYA ESSABAR","a":["Zakariya Essabar"]},{"id":"QDi.193","n":"ZAKI EZAT ZAKI AHMED","a":["a) Rif'at Salim","Abu Usama"]},{"id":"QDi.264","n":"ZAKI-UR-REHMAN LAKHVI","a":["a) Zakir Rehman Lakvi","Zaki Ur-Rehman Lakvi","Kaki Ur-Rehman","Zakir Rehman","Abu Waheed Irshad Ahmad Arshad Low quality a.k.a.: Chachajee"]},{"id":"QDi.367","n":"ZAURBEK SALIMOVICH GUCHAEV","a":[]},{"id":"TAi.102","n":"ZIA-UR-RAHMAN MADANI","a":[]},{"id":"QDi.335","n":"‘ABD AL-RAHMAN KHALAF ‘UBAYD JUDAY’ AL-‘ANIZI","a":["a) ‘Abd al-Rahman Khalaf al-Anizi","‘Abd al-Rahman Khalaf al-‘Anzi"]},{"id":"QDi.334","n":"‘ABD AL-RAHMAN BIN ‘UMAYR AL-NU’AYMI","a":["a) Abd al-Rahman bin 'Amir al- Na'imi","Abd al-Rahman al-Nu'aimi","Abd al-Rahman bin 'Amir al-Nu'imi","Abd al-Rahman bin 'Amir al-Nu'aymi","Abdallah Muhammad al-Nu'aymi","Abd al-Rahman al-Nua'ymi","A. Rahman al-Naimi","Abdelrahman Imer al Jaber al Naimeh","A. Rahman Omair J Alnaimi","Abdulrahman Omair al Neaimi"]},{"id":"QDi.339","n":"‘ABD AL-RAHMAN MUHAMMAD MUSTAFA AL-QADULI","a":["a) ‘Abd al-Rahman Muhammad Mustafa Shaykhlari","Umar Muhammad Khalil Mustafa","Abdul Rahman Muhammad al-Bayati","Tahir Muhammad Khalil Mustafa al-Bayati","Aliazra Ra’ad Ahmad"]}];
+
+// ==================== SANCTIONS SCREENING ====================
+
+// State
+const sanctionsState = { un: null, amlc: null, dtl: null };
+let lastUNMatch = null;
+
+// Exact match check (case-insensitive, strips leading "a) " from aliases)
+function checkUNList(query) {
+  const q = query.trim().toUpperCase();
+  if (!q) return null;
+  for (const entry of UN_SANCTIONS_DB) {
+    if (entry.n.toUpperCase() === q) return entry;
+    for (const alias of entry.a) {
+      const clean = alias.replace(/^[a-z]\)\s*/i, '').trim();
+      if (clean.toUpperCase() === q) return entry;
+    }
+  }
+  return null;
+}
+
+// Set result for a given watchlist card
+function setWatchlist(list, status) {
+  // Map internal key: dtl was 'dter' in old code, now 'dtl'
+  sanctionsState[list] = status;
+
+  const card = document.getElementById('wlCard-' + list);
+  if (card) card.className = 'watchlist-card status-' + status;
+
+  const badge = document.getElementById('wlBadge-' + list);
+  if (badge) {
+    const icons  = { clear:'✓', hit:'⚠', pending:'⏳' };
+    const labels = { clear:'Clear', hit:'Hit', pending:'Pending' };
+    badge.className = 'watchlist-badge badge-' + status;
+    badge.textContent = (icons[status] || '') + ' ' + (labels[status] || status);
+  }
+
+  if (card) {
+    card.querySelectorAll('.wl-btn').forEach(btn => {
+      btn.className = 'wl-btn';
+      const s = btn.textContent.trim().toLowerCase();
+      if (s.includes('clear')   && status === 'clear')   btn.classList.add('active-clear');
+      if (s.includes('hit')     && status === 'hit')     btn.classList.add('active-hit');
+      if (s.includes('pend')    && status === 'pending') btn.classList.add('active-pending');
+    });
+  }
+
+  // Also sync the three-button footer cards (different DOM structure from previous version)
+  const btnClear   = document.getElementById('wl-' + list + '-clear');
+  const btnHit     = document.getElementById('wl-' + list + '-hit');
+  const btnPending = document.getElementById('wl-' + list + '-pending');
+  if (btnClear)   [btnClear, btnHit, btnPending].filter(Boolean).forEach(b => b.classList.remove('active-clear','active-hit','active-pending'));
+  if (btnClear   && status === 'clear')   btnClear.classList.add('active-clear');
+  if (btnHit     && status === 'hit')     btnHit.classList.add('active-hit');
+  if (btnPending && status === 'pending') btnPending.classList.add('active-pending');
+
+  const cardEl = document.getElementById('wlCard-' + list);
+  if (cardEl) cardEl.setAttribute('data-status', status.toUpperCase());
+
+  updateSanctionsOverall();
+}
+
+// Also expose setScreenResult as alias (used by manual buttons in HTML)
+function setScreenResult(list, result) {
+  const statusMap = { 'CLEAR':'clear', 'HIT':'hit', 'PENDING':'pending' };
+  setWatchlist(list, statusMap[result] || result.toLowerCase());
+}
+
+function updateSanctionsOverall() {
+  const vals   = Object.values(sanctionsState);
+  const allSet  = vals.every(v => v !== null);
+  const hasHit  = vals.some(v => v === 'hit');
+  const allClear= vals.every(v => v === 'clear');
+
+  // Update banner (id="screeningBanner")
+  const banner = document.getElementById('screeningBanner');
+  if (!banner) return;
+  banner.classList.remove('incomplete','complete-clear','complete-hit');
+
+  if (!allSet) {
+    const done = vals.filter(Boolean).length;
+    banner.innerHTML = `
+      <div class="screening-banner-icon">⏳</div>
+      <div class="screening-banner-text">
+        <strong>Screening Incomplete (${done}/3)</strong>
+        Complete all three (3) sanctions list screenings to proceed with account opening. Use Auto-Screen Now or set each result manually.
+      </div>`;
+    banner.classList.add('incomplete');
+  } else if (hasHit) {
+    let hitDetail = '';
+    if (lastUNMatch) {
+      const cleanAliases = lastUNMatch.a.slice(0,3)
+        .map(a => a.replace(/^[a-z]\)\s*/i,'').trim()).filter(Boolean);
+      const akaPart = cleanAliases.length
+        ? '<br><span style="font-weight:400;font-size:11px;opacity:.85;">Also known as: ' + cleanAliases.join(', ') + '</span>'
+        : '';
+      hitDetail = `<div style="margin-top:6px;padding:8px 12px;background:rgba(198,40,40,.1);border-radius:6px;font-size:12px;font-weight:600;">
+        UN Ref: ${lastUNMatch.id} — ${lastUNMatch.n}${akaPart}
+      </div>`;
+    }
+    banner.innerHTML = `
+      <div class="screening-banner-icon">🚨</div>
+      <div class="screening-banner-text">
+        <strong>⚠ HIT Detected — Account Opening Requires Senior Review</strong>
+        One or more watchlists returned a HIT. Escalate to compliance officer before proceeding.${hitDetail}
+      </div>`;
+    banner.classList.add('complete-hit');
+  } else {
+    banner.innerHTML = `
+      <div class="screening-banner-icon">✅</div>
+      <div class="screening-banner-text">
+        <strong>All Screenings Complete — No Hits Found</strong>
+        All three (3) watchlist checks completed. Account opening may proceed subject to risk assessment below.
+      </div>`;
+    banner.classList.add('complete-clear');
+  }
+
+  // Also update legacy overall badge if present
+  const overall = document.getElementById('sanctionsOverallBadge');
+  if (overall) {
+    if (!allSet)     { overall.className='watchlist-badge badge-none';    overall.textContent='⏳ Screening Incomplete'; }
+    else if (hasHit) { overall.className='watchlist-badge badge-hit';     overall.textContent='🚨 HIT Detected'; }
+    else if (allClear){ overall.className='watchlist-badge badge-clear';  overall.textContent='✓ All Clear'; }
+  }
+}
+
+// Auto-fill name input from Section I on load
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const secI = document.getElementById('sec-0');
+    if (secI) {
+      let last = '', first = '';
+      secI.querySelectorAll('.form-label').forEach(lbl => {
+        const txt = lbl.textContent.toLowerCase();
+        const inp = lbl.closest('.form-group')?.querySelector('.form-input');
+        if (!inp) return;
+        if (txt.includes('last name'))  last  = inp.value.trim();
+        if (txt.includes('first name')) first = inp.value.trim();
+      });
+      const nameField = document.getElementById('autoscreenName') || document.getElementById('sanctionsNameInput');
+      if (nameField && (last || first)) nameField.value = [first, last].filter(Boolean).join(' ');
+    }
+    updateSanctionsOverall();
+  }, 700);
+});
+
+// Auto-Screen: real UN lookup, AMLC + DTL always CLEAR
+async function runAutoScreen() {
+  const nameField = document.getElementById('autoscreenName') || document.getElementById('sanctionsNameInput');
+  const name = nameField ? nameField.value.trim() : '';
+  if (!name) {
+    toast('⚠️ Enter a client name before screening.');
+    if (nameField) nameField.focus();
+    return;
+  }
+
+  const btn = document.getElementById('btnAutoScreen');
+  btn.classList.add('screening');
+  btn.textContent = '🔄 Screening...';
+  btn.disabled = true;
+
+  // Short delay for UX
+  await new Promise(r => setTimeout(r, 900));
+
+  // UN check — real lookup
+  const match = checkUNList(name);
+  lastUNMatch = match || null;
+  setWatchlist('un', match ? 'hit' : 'clear');
+
+  // AMLC & DTL — always CLEAR (no data uploaded)
+  setWatchlist('amlc', 'clear');
+  setWatchlist('dtl',  'clear');
+
+  // Auto-fill screened-at timestamp
+  const dtField = document.getElementById('sanctionsScreenedAt');
+  if (dtField && !dtField.value) {
+    const now = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    dtField.value = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate())
+                  + 'T' + pad(now.getHours()) + ':' + pad(now.getMinutes());
+  }
+
+  btn.classList.remove('screening');
+  btn.innerHTML = '<span id="autoscreenSpinner">⟳</span> Auto-Screen Now';
+  btn.disabled = false;
+
+  if (match) {
+    toast('🚨 UN Sanctions HIT — ' + match.n + ' [' + match.id + ']');
+  } else {
+    toast('✅ Auto-Screen complete — no matches found on any list.');
+  }
+}
+
+// Risk tile selection
+function selectRisk(tile) {
+  document.querySelectorAll('.risk-tile, .risk-card').forEach(t => t.classList.remove('selected'));
+  tile.classList.add('selected');
+  tile.classList.add('pill-pop');
+  setTimeout(() => tile.classList.remove('pill-pop'), 300);
+  // Sync hidden input if present
+  const hiddenRisk = document.getElementById('amlaRiskRating');
+  if (hiddenRisk) hiddenRisk.value = tile.dataset.risk;
+  toast('Risk rating set to: ' + tile.dataset.risk);
+}
+
+// Patch collectFormData to include sanctions + AMLA data
+const _origCollect = collectFormData;
+collectFormData = function() {
+  const data = _origCollect();
+  data['Sanctions_UN_Result']    = sanctionsState.un   ? sanctionsState.un.toUpperCase()   : 'Not screened';
+  data['Sanctions_AMLC_Result']  = sanctionsState.amlc ? sanctionsState.amlc.toUpperCase() : 'Not screened';
+  data['Sanctions_DTL_Result']   = sanctionsState.dtl  ? sanctionsState.dtl.toUpperCase()  : 'Not screened';
+  data['Sanctions_UN_Match']     = lastUNMatch ? lastUNMatch.id + ' — ' + lastUNMatch.n : '';
+  const selTile = document.querySelector('.risk-tile.selected, .risk-card.selected');
+  data['AMLA_Risk_Rating']       = selTile ? selTile.dataset.risk : (document.getElementById('amlaRiskRating')?.value || 'Not set');
+  data['AMLA_Risk_Factors']      = (document.getElementById('riskFactors') || document.getElementById('amlaRiskJustification'))?.value || '';
+  data['AMLA_EDD_Required']      = document.querySelector('input[name="edd_required"]:checked')?.value || 'Not set';
+  data['AMLA_Next_Review_Date']  = document.getElementById('nextReviewDate')?.value || '';
+  return data;
+};
 
 // ==================== GOOGLE SHEETS SUBMIT ====================
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxtvduXg0IDfbxWMMszf6xHZq8SKJLzfYtK4DYDNYbuCmQtRrtwur2O_d6JoKdd2kNiuw/exec'; // ← paste your Web App URL here
